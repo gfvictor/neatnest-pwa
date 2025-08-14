@@ -1,0 +1,19 @@
+@use '../abstracts/variables' as vars
+
+button
+  background: vars.$bg-dark
+  color: vars.$text-light
+  padding: 1rem 3rem
+  margin-top: 1.5rem
+  border: none
+  border-radius: 0.5rem
+  font-size: 1rem
+  cursor: pointer
+  transition: all 0.3s ease-in-out
+
+  &:hover
+      background: vars.$hover-dark
+
+  &:disabled
+      background: vars.$hover-dark
+      cursor: not-allowed
