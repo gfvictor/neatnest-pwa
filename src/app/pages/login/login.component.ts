@@ -15,27 +15,44 @@ export class LoginComponent {
     password: string = '';
     errorMessage: string = '';
     isLoading: boolean = false;
-    isFadingOut: boolean = false;
-
 
     constructor(private router: Router, private http: HttpClient) {}
-
 
     login() {
         this.isLoading = true;
         this.errorMessage = '';
 
+        type LoginResponse = {
+            access_token: string;
+            refresh_token: string;
+        }
+
         const body = { identifier: <string> this.identifier, password: <string> this.password };
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-        this.http.post<{ accessToken: string }>('https://neatnest.vercel.app/auth/login', body, { headers })
+        this.http.post<LoginResponse>(
+            'https://neatnest.vercel.app/auth/login', body,
+            { headers }
+        )
             .subscribe({
-                next: (response: { accessToken: string }) => {
-                    localStorage.setItem('token', response.accessToken);
+                next: (response) => {
+                    const access = response?.access_token;
+                    const refresh = response?.refresh_token;
+
+                    if (!access) {
+                        this.errorMessage = 'Login error: missing token.'
+                        this.isLoading = false;
+                        return;
+                    }
+
+                    localStorage.setItem('token', access);
+                    localStorage.setItem('refresh_token', refresh);
                     this.isLoading = false;
-                    void this.router.navigate(['/dashboard']);
+                    setTimeout(() => {
+                        void this.router.navigate(['/dashboard']);
+                    }, 100);
                 },
-                error: (err) => {
+                error: () => {
                     this.errorMessage = 'Login error. Verify your credentials.'
                     this.isLoading = false;
                 }
