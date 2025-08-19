@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
 export class DashboardComponent {
     homeUse: boolean = false;
     workUse: boolean = false;
-    isLoading: boolean = true;
+    isLoading: boolean = false;
 
     constructor(private router: Router, private http: HttpClient) {}
 
