@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apiUrl: 'https://neatnest-api.vercel.app'
+    apiUrl: 'https://neatnest.vercel.app'
 };
