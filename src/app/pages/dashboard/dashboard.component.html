@@ -1,0 +1,26 @@
+<div class="login-container">
+
+    <div class="logo-container">
+        <img ngSrc="assets/logos/neatnest-logo.svg" width="250" height="250" alt="NeatNest Logo" priority>
+    </div>
+
+    <div class="dashboard-options">
+        <div>
+            <button type="button" (click)="goToHousehold()">Household</button>
+        </div>
+        <div>
+            <button type="button" (click)="goToWorkplace()">Workplace</button>
+        </div>
+    </div>
+
+    <div class="dashboard-logout">
+        <button type="button" (click)="logout()" [disabled]="isLoading">
+            {{ isLoading ? 'Logging out...' : 'Logout' }}
+        </button>
+    </div>
+
+    <footer>
+        <p>© 2025 NeatNest - All Rights Reserved</p>
+    </footer>
+
+</div>
