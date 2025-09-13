@@ -1,42 +1,61 @@
 <div class="login-container">
-    <div class="logo-container">
-        <img ngSrc="assets/logos/neatnest-logo.svg" alt="NeatNest Logo" width="160" height="160" priority>
-    </div>
+  <div class="logo-container">
+    <img
+      ngSrc="assets/logos/neatnest-logo.svg"
+      alt="NeatNest Logo"
+      width="160"
+      height="160"
+      priority
+    />
+  </div>
 
-    <h1 *ngIf="room">{{ room.name }}</h1>
+  <h1 *ngIf="room">{{ room.name }}</h1>
 
-    <form (ngSubmit)="createContainer()" style="margin-top: 1rem">
-        <label for="containerName">New container name</label>
-        <input id="containerName" type="text" [(ngModel)]="newContainerName" name="containerName" required>
+  <form (ngSubmit)="createContainer()" style="margin-top: 1rem">
+    <label for="containerName">New container name</label>
+    <input
+      id="containerName"
+      type="text"
+      [(ngModel)]="newContainerName"
+      name="containerName"
+      required
+    />
 
-        <label for="containerNumber">Number</label>
-        <input id="containerNumber" type="number" [(ngModel)]="newContainerNumber" name="containerNumber" required
-               min="0">
+    <label for="containerNumber">Number</label>
+    <input
+      id="containerNumber"
+      type="number"
+      [(ngModel)]="newContainerNumber"
+      name="containerNumber"
+      required
+      min="0"
+    />
 
-        <button type="submit" [disabled]="isLoading || !newContainerName.trim() || newContainerNumber == null">
-            {{ isLoading ? 'Loading...' : 'Create Container' }}
-        </button>
-    </form>
+    <button
+      type="submit"
+      [disabled]="isLoading || !newContainerName.trim() || newContainerNumber == null"
+    >
+      {{ isLoading ? "Loading..." : "Create Container" }}
+    </button>
+  </form>
 
-    <p class="error-message" *ngIf="errorMessage"> {{ errorMessage }}</p>
+  <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-    <div style="margin-top: 1.25rem; width: 100%; max-width: 360px; text-align: left;">
-        <h2 style="margin-bottom: .5rem;">Containers</h2>
+  <div style="margin-top: 1.25rem; width: 100%; max-width: 360px; text-align: left">
+    <h2 style="margin-bottom: 0.5rem">Containers</h2>
 
-        <ng-container *ngIf="!isLoading && containers.length === 0">
-            <p>No containers yet.</p>
-        </ng-container>
+    <ng-container *ngIf="!isLoading && containers.length === 0">
+      <p>No containers yet.</p>
+    </ng-container>
 
-        <ul style="list-style: none; padding: 0; margin: 0;">
-            <li *ngFor="let c of containers" style="padding: .5rem 0; border-bottom: 1px solid #ddd;">
-                <button type="button" (click)="openContainer(c)">
-                    {{ c.name }} — #{{ c.number }}
-                </button>
-            </li>
-        </ul>
-    </div>
+    <ul style="list-style: none; padding: 0; margin: 0">
+      <li *ngFor="let c of containers" style="padding: 0.5rem 0; border-bottom: 1px solid #ddd">
+        <button type="button" (click)="openContainer(c)">{{ c.name }} — #{{ c.number }}</button>
+      </li>
+    </ul>
+  </div>
 
-    <footer>
-        <p>© 2025 NeatNest - All Rights Reserved</p>
-    </footer>
+  <footer>
+    <p>© 2025 NeatNest - All Rights Reserved</p>
+  </footer>
 </div>
