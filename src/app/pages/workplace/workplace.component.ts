@@ -1,13 +1,11 @@
-import {Component} from '@angular/core';
-import {CommonModule} from "@angular/common";
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: 'app-workplace',
+  selector: "app-workplace",
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './workplace.component.html',
-  styleUrl: './workplace.component.css'
+  templateUrl: "./workplace.component.html",
+  styleUrl: "./workplace.component.css",
 })
-export class WorkplaceComponent {
-
-}
+export class WorkplaceComponent {}

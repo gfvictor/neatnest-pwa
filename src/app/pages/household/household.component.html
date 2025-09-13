@@ -1,44 +1,50 @@
 <div class="login-container">
-    <div class="logo-container">
-        <img ngSrc="assets/logos/neatnest-logo.svg" width="180" height="180" alt="NeatNest Logo" priority>
-    </div>
+  <div class="logo-container">
+    <img
+      ngSrc="assets/logos/neatnest-logo.svg"
+      width="180"
+      height="180"
+      alt="NeatNest Logo"
+      priority
+    />
+  </div>
 
-    <h1>Household</h1>
+  <h1>Household</h1>
 
-    <div style="margin-top: 1.25rem; width: 100%; max-width: 360px; text-align: left;">
-        <h2 style="margin-bottom: .5rem;">Rooms</h2>
+  <div style="margin-top: 1.25rem; width: 100%; max-width: 360px; text-align: left">
+    <h2 style="margin-bottom: 0.5rem">Rooms</h2>
 
-        <ng-container *ngIf="!isLoading && rooms.length === 0">
-            <p>No rooms yet.</p>
-        </ng-container>
+    <ng-container *ngIf="!isLoading && rooms.length === 0">
+      <p>No rooms yet.</p>
+    </ng-container>
 
-        <ul style="list-style: none; padding: 0; margin: 0;">
-            <li *ngFor="let r of rooms" style="padding: .5rem 0; border-bottom: 1px solid #ddd;">
-                <button type="button" (click)="openRoom(r)">
-                    {{ r.name }}
-                </button>
-            </li>
-        </ul>
-    </div>
-
-    <form (ngSubmit)="createRoom()" style="margin-top: 1rem;">
-        <label for="roomName">New room name</label>
-        <input id="roomName" type="text" [(ngModel)]="newRoomName" name="roomName" required>
-
-        <button type="submit" [disabled]="isLoading || !newRoomName.trim()">
-            {{ isLoading ? 'Loading...' : 'Create Room' }}
+    <ul style="list-style: none; padding: 0; margin: 0">
+      <li *ngFor="let r of rooms" style="padding: 0.5rem 0; border-bottom: 1px solid #ddd">
+        <button type="button" (click)="openRoom(r)">
+          {{ r.name }}
         </button>
-    </form>
+      </li>
+    </ul>
+  </div>
 
-    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <form (ngSubmit)="createRoom()" style="margin-top: 1rem">
+    <label for="roomName">New room name</label>
+    <input id="roomName" type="text" [(ngModel)]="newRoomName" name="roomName" required />
 
-    <div style="margin-bottom: 1.25rem;">
-        <button type="button" (click)="backPage()" [disabled]="isLoading">
-            {{ isLoading ? 'Loading...' : 'Back' }}
-        </button>
-    </div>
+    <button type="submit" [disabled]="isLoading || !newRoomName.trim()">
+      {{ isLoading ? "Loading..." : "Create Room" }}
+    </button>
+  </form>
 
-    <footer>
-        <p>© 2025 NeatNest - All Rights Reserved</p>
-    </footer>
+  <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div style="margin-bottom: 1.25rem">
+    <button type="button" (click)="backPage()" [disabled]="isLoading">
+      {{ isLoading ? "Loading..." : "Back" }}
+    </button>
+  </div>
+
+  <footer>
+    <p>© 2025 NeatNest - All Rights Reserved</p>
+  </footer>
 </div>

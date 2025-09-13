@@ -1,44 +1,50 @@
 <div class="login-container">
+  <div class="logo-container">
+    <img
+      ngSrc="assets/logos/neatnest-logo.svg"
+      width="250"
+      height="250"
+      alt="NeatNest Logo"
+      priority
+    />
+  </div>
 
-    <div class="logo-container">
-        <img ngSrc="assets/logos/neatnest-logo.svg" width="250" height="250" alt="NeatNest Logo" priority>
-    </div>
+  <form (ngSubmit)="login()">
+    <label for="identifier">E-mail or Username</label>
+    <input type="text" id="identifier" [(ngModel)]="identifier" name="identifier" required />
 
-    <form (ngSubmit)="login()">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      [(ngModel)]="password"
+      name="password"
+      required
+      minlength="6"
+    />
 
-        <label for="identifier">E-mail or Username</label>
-        <input type="text" id="identifier" [(ngModel)]="identifier" name="identifier" required>
+    <button type="submit" [disabled]="isLoading">
+      {{ isLoading ? "Loading..." : "Login" }}
+    </button>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password" required minlength="6">
+    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </form>
 
-        <button type="submit" [disabled]="isLoading">
-            {{ isLoading ? 'Loading...' : 'Login' }}
-        </button>
+  <div class="links-container">
+    <p class="recovery-link">
+      <a (click)="navigateToRecovery()">Forgot your username or password?</a>
+    </p>
 
-        <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+    <p class="register-link">
+      Don't have an account? <a (click)="navigateToRegister()"><b>Sign up here</b></a>
+    </p>
+  </div>
 
-    </form>
+  <div class="bg-arrows">
+    <img ngSrc="assets/vectors/arrows.svg" width="300" height="150" alt="Color arrows" priority />
+  </div>
 
-
-    <div class="links-container">
-
-        <p class="recovery-link">
-            <a (click)="navigateToRecovery()">Forgot your username or password?</a>
-        </p>
-
-        <p class="register-link">
-            Don't have an account? <a (click)="navigateToRegister()"><b>Sign up here</b></a>
-        </p>
-
-    </div>
-
-    <div class="bg-arrows">
-        <img ngSrc="assets/vectors/arrows.svg" width="300" height="150" alt="Color arrows" priority>
-    </div>
-
-    <footer>
-        <p>© 2025 NeatNest - All Rights Reserved</p>
-    </footer>
-
+  <footer>
+    <p>© 2025 NeatNest - All Rights Reserved</p>
+  </footer>
 </div>
