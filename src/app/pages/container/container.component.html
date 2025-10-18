@@ -1,0 +1,37 @@
+<div class="login-container">
+    <div class="logo-container">
+        <img
+            ngSrc="assets/logos/neatnest-logo.svg"
+            alt="NeatNest Logo"
+            width="160"
+            height="160"
+            priority
+        />
+    </div>
+
+    <div *ngIf="isLoading">Carregando container...</div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <div *ngIf="!isLoading && container" class="container-details">
+        <h1>{{ container.name }}</h1>
+        <p><strong>Número:</strong> {{ container.number }}</p>
+
+        <div *ngIf="container.image">
+<!--            <img ngSrc="container.image" alt="Container image" width="180" />-->
+        </div>
+
+        <div *ngIf="!container.image">
+            <p>Nenhuma imagem disponível.</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 1.25rem">
+        <button type="button" (click)="backToRoom()" [disabled]="isLoading">
+            {{ isLoading ? "Loading..." : "Back" }}
+        </button>
+    </div>
+
+    <footer>
+        <p>© 2025 NeatNest - All Rights Reserved</p>
+    </footer>
+</div>

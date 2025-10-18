@@ -29,6 +29,7 @@
       name="containerNumber"
       required
       min="0"
+      step="1"
     />
 
     <button
@@ -53,6 +54,12 @@
         <button type="button" (click)="openContainer(c)">{{ c.name }} — #{{ c.number }}</button>
       </li>
     </ul>
+  </div>
+
+  <div style="margin-bottom: 1.25rem">
+    <button type="button" (click)="backToHousehold()" [disabled]="isLoading">
+      {{ isLoading ? "Loading..." : "Back" }}
+    </button>
   </div>
 
   <footer>

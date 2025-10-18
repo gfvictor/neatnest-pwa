@@ -50,7 +50,7 @@ export class RoomComponent {
       next: (room) => {
         this.room = room;
 
-        this.containerApi.listByLocation().subscribe({
+        this.containerApi.listByLocation(this.roomId).subscribe({
           next: (all: Container[]) => {
             this.containers = (all ?? []).filter((c) => c.roomId === this.roomId);
             this.isLoading = false;
@@ -92,7 +92,7 @@ export class RoomComponent {
   }
 
   openContainer(c: Container): void {
-    void this.router.navigate(["/container", c.id]);
+    void this.router.navigate([`/container/${c.id}`]);
   }
 
   backToHousehold(): void {
