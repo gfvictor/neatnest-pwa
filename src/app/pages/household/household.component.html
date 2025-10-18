@@ -39,7 +39,7 @@
   <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
 
   <div style="margin-bottom: 1.25rem">
-    <button type="button" (click)="backPage()" [disabled]="isLoading">
+    <button type="button" (click)="goBack()" [disabled]="isLoading">
       {{ isLoading ? "Loading..." : "Back" }}
     </button>
   </div>

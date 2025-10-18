@@ -86,12 +86,4 @@ export class HouseholdComponent {
   goBack(): void {
     void this.router.navigate(["/dashboard"]);
   }
-
-  backPage(): void {
-    this.isLoading = true;
-
-    this.isLoading = false;
-    void this.router.navigate(["/dashboard"]);
-    return;
-  }
 }
