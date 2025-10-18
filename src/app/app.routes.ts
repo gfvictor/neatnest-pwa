@@ -25,4 +25,9 @@ export const routes: Routes = [
     path: "room/:id",
     loadComponent: () => import("./pages/room/room.component").then((m) => m.RoomComponent),
   },
+  {
+    path: "container/:id",
+    loadComponent: () =>
+      import("./pages/container/container.component").then((m) => m.ContainerComponent),
+  },
 ];
