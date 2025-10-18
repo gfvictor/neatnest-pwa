@@ -16,6 +16,9 @@ export class ApiService {
   }
 
   postData(endpoint: string, data: any): Observable<any> {
-    return this.http.post<string>(`${this.apiUrl}/${endpoint}`, data);
+    return this.http.post<string>(`${this.apiUrl}/${endpoint}`, data, {
+      headers: { "Content-Type": "application/json" },
+      withCredentials: true,
+    });
   }
 }

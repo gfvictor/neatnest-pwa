@@ -3,6 +3,7 @@ import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
+import { ApiService } from "../../services/api.service";
 
 @Component({
   selector: "app-login",
@@ -18,7 +19,7 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private http: HttpClient,
+    private apiService: ApiService,
   ) {}
 
   login() {
@@ -31,33 +32,30 @@ export class LoginComponent {
     };
 
     const body = { identifier: <string>this.identifier, password: <string>this.password };
-    const headers = new HttpHeaders({ "Content-Type": "application/json" });
 
-    this.http
-      .post<LoginResponse>("https://neatnest.vercel.app/auth/login", body, { headers })
-      .subscribe({
-        next: (response) => {
-          const access = response?.access_token;
-          const refresh = response?.refresh_token;
+    this.apiService.postData("https://neatnest.vercel.app/auth/login", body).subscribe({
+      next: (response) => {
+        const access = response?.access_token;
+        const refresh = response?.refresh_token;
 
-          if (!access) {
-            this.errorMessage = "Login error: missing token.";
-            this.isLoading = false;
-            return;
-          }
-
-          localStorage.setItem("token", access);
-          localStorage.setItem("refresh_token", refresh);
+        if (!access) {
+          this.errorMessage = "Login error: missing token.";
           this.isLoading = false;
-          setTimeout(() => {
-            void this.router.navigate(["/dashboard"]);
-          }, 100);
-        },
-        error: () => {
-          this.errorMessage = "Login error. Verify your credentials.";
-          this.isLoading = false;
-        },
-      });
+          return;
+        }
+
+        localStorage.setItem("token", access);
+        localStorage.setItem("refresh_token", refresh);
+        this.isLoading = false;
+        setTimeout(() => {
+          void this.router.navigate(["/dashboard"]);
+        }, 100);
+      },
+      error: () => {
+        this.errorMessage = "Login error. Verify your credentials.";
+        this.isLoading = false;
+      },
+    });
   }
 
   navigateToRecovery() {
