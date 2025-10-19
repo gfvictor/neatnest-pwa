@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import { CommonModule, NgOptimizedImage } from "@angular/common";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { ApiService } from "../../services/api.service";
@@ -26,17 +25,12 @@ export class LoginComponent {
     this.isLoading = true;
     this.errorMessage = "";
 
-    type LoginResponse = {
-      access_token: string;
-      refresh_token: string;
-    };
-
     const body = { identifier: <string>this.identifier, password: <string>this.password };
 
-    this.apiService.postData("https://neatnest.vercel.app/auth/login", body).subscribe({
+    this.apiService.postData("auth/login", body).subscribe({
       next: (response) => {
-        const access = response?.access_token;
-        const refresh = response?.refresh_token;
+        const access: string = response?.access_token;
+        const refresh: string = response?.refresh_token;
 
         if (!access) {
           this.errorMessage = "Login error: missing token.";
