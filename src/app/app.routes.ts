@@ -26,8 +26,13 @@ export const routes: Routes = [
     loadComponent: () => import("./pages/room/room.component").then((m) => m.RoomComponent),
   },
   {
-    path: "container/:id",
+    path: "container/:containerId",
     loadComponent: () =>
       import("./pages/container/container.component").then((m) => m.ContainerComponent),
+  },
+
+  {
+    path: "object/:id",
+    loadComponent: () => import("./pages/object/object.component").then((m) => m.ObjectComponent),
   },
 ];

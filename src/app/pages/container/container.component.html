@@ -9,19 +9,74 @@
         />
     </div>
 
-    <div *ngIf="isLoading">Carregando container...</div>
+    <div *ngIf="isLoading">Loading Container...</div>
     <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
 
     <div *ngIf="!isLoading && container" class="container-details">
-        <h1>{{ container.name }}</h1>
-        <p><strong>Número:</strong> {{ container.number }}</p>
+        <h1>{{ container.name.toUpperCase() }} - {{ container.number }}</h1>
 
         <div *ngIf="container.image">
-<!--            <img ngSrc="container.image" alt="Container image" width="180" />-->
+            <img ngSrc="{{ container.image }}" alt="Container image" width="180" height="180" />
         </div>
 
-        <div *ngIf="!container.image">
-            <p>Nenhuma imagem disponível.</p>
+        <div class="object-form" style="margin-top: 2rem">
+            <h3>Add new Object</h3>
+
+            <form (ngSubmit)="createObject()" #objForm="ngForm">
+                <label for="objName"></label>
+                <input
+                    type="text"
+                    id="objName"
+                    [(ngModel)]="newObjName"
+                    name="objName"
+                    placeholder="Object name"
+                    required
+                />
+
+                <label for="objQuantity"></label>
+                <input
+                    type="number"
+                    id="objQuantity"
+                    [(ngModel)]="newObjQuantity"
+                    name="objQuantity"
+                    min="1"
+                    placeholder="Quantity"
+                    required
+                />
+
+                <label for="objCategory"></label>
+                <input
+                    type="text"
+                    id="objCategory"
+                    [(ngModel)]="newObjCategory"
+                    name="objCategory"
+                    placeholder="Category (optional)"
+                />
+
+                <button type="submit" [disabled]="isCreating || !newObjName.trim()">
+                    {{ isCreating ? "Adding..." : "Add Object" }}
+                </button>
+            </form>
+        </div>
+
+        <!-- Lista de objetos -->
+        <div class="object-list" style="margin-top: 2rem">
+            <h3>Objects in this container</h3>
+
+            <div *ngIf="objects.length === 0">
+                <p>No object found.</p>
+            </div>
+
+            <ul *ngIf="objects.length > 0">
+                <li
+                    *ngFor="let obj of objects"
+                    style="cursor: pointer"
+                    (click)="router.navigate(['/object', obj.id])"
+                >
+                    <strong>{{ obj.name }}</strong> — {{ obj.quantity }}
+                    <span *ngIf="obj.category">({{ obj.category }})</span>
+                </li>
+            </ul>
         </div>
     </div>
 
