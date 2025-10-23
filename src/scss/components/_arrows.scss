@@ -1,0 +1,11 @@
+.bg-arrows {
+  position: absolute;
+  align-self: end;
+  opacity: 45%;
+
+  img {
+    width: 100vw;
+    height: auto;
+    z-index: -10;
+  }
+}
