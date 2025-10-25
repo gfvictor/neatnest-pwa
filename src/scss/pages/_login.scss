@@ -1,4 +1,4 @@
-@use '../abstracts/variables' as vars;
+@use "../abstracts/variables" as vars;
 
 .login-container {
   display: grid;
@@ -15,13 +15,14 @@
 
   form {
     display: grid;
-    gap: .5rem;
+    gap: 0.5rem;
     width: 100%;
     max-width: 320px;
     z-index: 10;
   }
 
   label {
+    color: vars.$text-light;
     font-weight: vars.$font-bold;
     text-align: left;
   }
@@ -34,7 +35,7 @@
     color: vars.$main-light;
     font-weight: vars.$font-slim;
     border-radius: 0.5rem;
-    font-size: .875rem;
+    font-size: 0.875rem;
   }
 
   .logo-container {
@@ -46,23 +47,24 @@
   .error-message {
     color: vars.$error-light;
     font-size: 0.875rem;
+    margin-top: 0.5rem;
   }
 
   .register-link,
   .recovery-link {
     position: relative;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
     font-size: 0.9rem;
     z-index: 1;
   }
 
-    a {
-      color: vars.$main-light;
-      cursor: pointer;
-      text-decoration: none;
+  a {
+    color: vars.$main-light;
+    cursor: pointer;
+    text-decoration: none;
 
-      &:hover {
-        color: vars.$main-light, 10%;
-      }
+    &:hover {
+      color: vars.$main-light, 10%;
     }
+  }
 }
