@@ -1,6 +1,7 @@
-@use '../abstracts/variables' as vars;
+@use "../abstracts/variables" as vars;
 
 footer {
   color: vars.$main-light;
-  font-size: .75rem;
+  font-size: 0.75rem;
+  pointer-events: none;
 }

@@ -1,22 +1,50 @@
-@use '../abstracts/variables' as vars;
+@use "../abstracts/variables" as vars;
 
-button {
-  background: vars.$bg-dark;
+button,
+button:active {
+  position: relative;
+  background: vars.$button-light;
   color: vars.$text-light;
   padding: 1rem 3rem;
   margin-top: 1.5rem;
   border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
+  border-radius: 0.8rem;
+  font-family: "KoHo", sans-serif;
+  font-size: 1.5rem;
+  font-weight: vars.$font-regular;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 -5px 0;
+    border-radius: 0.8rem;
+    background: vars.$gradient-light;
+    opacity: 0.6;
+    transition: all 0.3s ease-in-out;
+    z-index: -1;
+  }
+
   &:hover {
-      background: vars.$hover-dark;
+    background: vars.$button-light;
+  }
+
+  &:hover::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border-radius: 0.8rem;
+    background: vars.$gradient-light;
+    filter: blur(6px);
+    opacity: 0.8;
+    transition: all 0.3s ease-in-out;
+    z-index: -1;
   }
 
   &:disabled {
-      background: vars.$hover-dark;
-      cursor: not-allowed;
+    background: vars.$disabled-light;
+    color: vars.$loading-text-light;
+    cursor: not-allowed;
   }
 }
