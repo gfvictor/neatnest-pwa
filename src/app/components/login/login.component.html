@@ -2,18 +2,18 @@
   <div class="logo-container">
     <img
       ngSrc="assets/logos/neatnest-logo.svg"
-      width="250"
-      height="250"
+      width="350"
+      height="350"
       alt="NeatNest Logo"
       priority
     />
   </div>
 
   <form (ngSubmit)="login()">
-    <label for="identifier">E-mail or Username</label>
+    <label for="identifier">Username ou E-mail</label>
     <input type="text" id="identifier" [(ngModel)]="identifier" name="identifier" required />
 
-    <label for="password">Password</label>
+    <label for="password">Senha</label>
     <input
       type="password"
       id="password"
@@ -23,7 +23,7 @@
       minlength="6"
     />
 
-    <button type="submit" [disabled]="isLoading">
+    <button ngtype="submit" [disabled]="isLoading">
       {{ isLoading ? "Loading..." : "Login" }}
     </button>
 
@@ -32,11 +32,11 @@
 
   <div class="links-container">
     <p class="recovery-link">
-      <a (click)="navigateToRecovery()">Forgot your username or password?</a>
+      <a (click)="navigateToRecovery()">Esqueceu seu Username ou Senha?</a>
     </p>
 
     <p class="register-link">
-      Don't have an account? <a (click)="navigateToRegister()"><b>Sign up here</b></a>
+      Não tem uma conta? <a (click)="navigateToRegister()"><b>Inscreva-se aqui.</b></a>
     </p>
   </div>
 
