@@ -1,11 +1,13 @@
-@use 'abstracts/variables' as vars;
+@use "abstracts/variables" as vars;
 
-@use 'base/global';
+@use "base/global";
 
-@use 'components/arrows';
-@use 'components/buttons';
+@use "components/arrows";
+@use "components/buttons";
 
-@use 'layout/footer';
+@use "layout/footer";
 
-@use 'pages/home';
-@use 'pages/login';
+@use "mixins/loading";
+
+@use "pages/home";
+@use "pages/login";
