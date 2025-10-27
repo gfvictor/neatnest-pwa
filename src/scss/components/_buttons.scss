@@ -1,7 +1,6 @@
 @use "../abstracts/variables" as vars;
 
-button,
-button:active {
+button {
   position: relative;
   background: vars.$button-light;
   color: vars.$text-light;
@@ -36,15 +35,26 @@ button:active {
     inset: -5px;
     border-radius: 0.8rem;
     background: vars.$gradient-light;
+    background-size: 300% 300%;
     filter: blur(6px);
     opacity: 0.8;
     transition: all 0.3s ease-in-out;
+    animation: gradientMove 2s linear infinite;
     z-index: -1;
   }
 
   &:disabled {
     background: vars.$disabled-light;
     color: vars.$loading-text-light;
+    transition: all 0.3s ease-in-out;
     cursor: not-allowed;
+
+    &::before {
+      background: vars.$gradient-light;
+      background-size: 300% 300%;
+      transition: all 0.3s ease-in-out;
+      animation: gradientMove 2s linear infinite;
+      opacity: 0.6;
+    }
   }
 }
