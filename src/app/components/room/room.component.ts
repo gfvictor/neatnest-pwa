@@ -11,7 +11,6 @@ import { ContainerApiService } from "../../services/container-api.service";
   standalone: true,
   imports: [CommonModule, NgOptimizedImage, FormsModule],
   templateUrl: "./room.component.html",
-  styleUrl: "./room.component.css",
 })
 export class RoomComponent {
   isLoading: boolean = true;

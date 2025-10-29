@@ -1,17 +1,14 @@
 import { Component } from "@angular/core";
 import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { Router } from "@angular/router";
-import { HouseholdApiService } from "../../services/household-api.service";
-import type { HouseholdRelations, Room } from "../../services/types";
-import { RoomApiService } from "../../services/room-api.service";
 import { FormsModule } from "@angular/forms";
+import { HouseholdApiService, HouseholdRelations, Room, RoomApiService } from "@neatnest/services";
 
 @Component({
   selector: "app-household",
   standalone: true,
   imports: [CommonModule, NgOptimizedImage, FormsModule],
   templateUrl: "./household.component.html",
-  styleUrl: "./household.component.css",
 })
 export class HouseholdComponent {
   household: HouseholdRelations | null = null;

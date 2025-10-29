@@ -10,7 +10,6 @@ import { ObjectApiService } from "../../services/object-api.service";
   standalone: true,
   imports: [CommonModule, NgOptimizedImage, FormsModule],
   templateUrl: "./object.component.html",
-  styleUrl: "./object.component.css",
 })
 export class ObjectComponent {
   objects: Obj[] = [];
