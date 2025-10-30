@@ -1,30 +1,37 @@
-<div class="login-container">
-  <div class="logo-container">
-    <img
-      ngSrc="assets/logos/neatnest-logo.svg"
-      width="250"
-      height="250"
-      alt="NeatNest Logo"
-      priority
-    />
+<div class="dashboard-container" *ngIf="!isLoading" @fadeInOut>
+  <app-logo></app-logo>
+
+  <div class="dashboard-greet">
+      <h1>
+          Bem vind{{ currentUser === "Sayo" ? "a" : "o" }},
+          <span>{{ currentUser }}</span>
+      </h1>
   </div>
 
-  <div class="dashboard-options">
-    <div>
-      <button type="button" (click)="goToHousehold()">Household</button>
+    <div class="dashboard-intro">
+        <p>
+            O que você quer de organizar?
+        </p>
     </div>
+
+  <div class="dashboard-options" style="position: relative; z-index: 1">
+    <button type="button" (click)="goToHousehold()">
+      {{ isLoading ? "Carregando" : "Casa" }}
+    </button>
+
     <div>
-      <button type="button" (click)="goToWorkplace()">Workplace</button>
+      <button type="button" (click)="goToWorkplace()">
+        {{ isLoading ? "Carregando" : "Trabalho" }}
+      </button>
     </div>
   </div>
 
-  <div class="dashboard-logout">
-    <button type="button" (click)="logout()" [disabled]="isLoading">
-      {{ isLoading ? "Logging out..." : "Logout" }}
+  <div class="dashboard-logout" style="position: relative; z-index: 1">
+    <button class="btn-logout" type="button" (click)="logout()" [disabled]="isLoading">
+      {{ isLoading ? "Saindo..." : "Logout" }}
     </button>
   </div>
 
-  <footer>
-    <p>© 2025 NeatNest - All Rights Reserved</p>
-  </footer>
+  <app-arrows></app-arrows>
+  <app-footer></app-footer>
 </div>
