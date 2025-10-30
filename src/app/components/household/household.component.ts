@@ -3,11 +3,12 @@ import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { HouseholdApiService, HouseholdRelations, Room, RoomApiService } from "@neatnest/services";
+import { ArrowsComponent, FooterComponent, LogoComponent } from "@neatnest/common";
 
 @Component({
   selector: "app-household",
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, FormsModule],
+  imports: [CommonModule, FormsModule, LogoComponent, FooterComponent, ArrowsComponent],
   templateUrl: "./household.component.html",
 })
 export class HouseholdComponent {

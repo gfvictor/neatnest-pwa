@@ -2,14 +2,13 @@ import { Component } from "@angular/core";
 import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
-import type { Container, Room } from "../../services/types";
-import { RoomApiService } from "../../services/room-api.service";
-import { ContainerApiService } from "../../services/container-api.service";
+import { Room, RoomApiService, Container, ContainerApiService } from "@neatnest/services";
+import {ArrowsComponent, FooterComponent, LogoComponent} from "@neatnest/common";
 
 @Component({
   selector: "app-room",
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, FormsModule],
+  imports: [CommonModule, FormsModule, LogoComponent, FooterComponent, ArrowsComponent],
   templateUrl: "./room.component.html",
 })
 export class RoomComponent {
