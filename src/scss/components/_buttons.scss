@@ -1,16 +1,17 @@
 @use "../abstracts/variables" as vars;
 
-button,
-button:active {
+button {
   position: relative;
   background: vars.$button-light;
   color: vars.$text-light;
-  padding: 1rem 3rem;
+  width: 100%;
+  max-width: 350px;
+  padding: 0.75rem 3rem;
   margin-top: 1.5rem;
   border: none;
   border-radius: 0.8rem;
   font-family: "KoHo", sans-serif;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: vars.$font-regular;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -36,15 +37,44 @@ button:active {
     inset: -5px;
     border-radius: 0.8rem;
     background: vars.$gradient-light;
+    background-size: 300% 300%;
     filter: blur(6px);
     opacity: 0.8;
     transition: all 0.3s ease-in-out;
+    animation: gradientMove 2s linear infinite;
     z-index: -1;
   }
 
   &:disabled {
     background: vars.$disabled-light;
     color: vars.$loading-text-light;
+    transition: all 0.3s ease-in-out;
     cursor: not-allowed;
+
+    &::before {
+      background: vars.$gradient-light;
+      background-size: 300% 300%;
+      transition: all 0.3s ease-in-out;
+      animation: gradientMove 2s linear infinite;
+      opacity: 0.6;
+    }
+  }
+}
+
+button.btn-logout {
+  position: relative;
+  padding: 0.75rem 2rem;
+  justify-self: end;
+  font-size: 1rem;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 -5px 0;
+    border-radius: 0.8rem;
+    background: vars.$disabled-light;
+    opacity: 0.6;
+    transition: all 0.3s ease-in-out;
+    z-index: -1;
   }
 }

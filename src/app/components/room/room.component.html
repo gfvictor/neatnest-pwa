@@ -1,13 +1,5 @@
 <div class="login-container">
-  <div class="logo-container">
-    <img
-      ngSrc="assets/logos/neatnest-logo.svg"
-      alt="NeatNest Logo"
-      width="160"
-      height="160"
-      priority
-    />
-  </div>
+<app-logo></app-logo>
 
   <h1 *ngIf="room">{{ room.name }}</h1>
 
@@ -62,7 +54,6 @@
     </button>
   </div>
 
-  <footer>
-    <p>© 2025 NeatNest - All Rights Reserved</p>
-  </footer>
+<app-arrows></app-arrows>
+<app-footer></app-footer>
 </div>

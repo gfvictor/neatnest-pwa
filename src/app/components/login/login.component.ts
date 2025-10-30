@@ -2,12 +2,13 @@ import { Component } from "@angular/core";
 import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
-import { ApiService } from "../../services/api.service";
+import { ApiService } from "@neatnest/services";
+import { ArrowsComponent, FooterComponent } from "@neatnest/common";
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [CommonModule, FormsModule, NgOptimizedImage],
+  imports: [CommonModule, FormsModule, NgOptimizedImage, FooterComponent, ArrowsComponent],
   templateUrl: "./login.component.html",
 })
 export class LoginComponent {

@@ -2,9 +2,9 @@ import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: "app-workplace",
+  selector: "app-footer",
   standalone: true,
   imports: [CommonModule],
-  templateUrl: "./workplace.component.html",
+  templateUrl: "./footer.component.html",
 })
-export class WorkplaceComponent {}
+export class FooterComponent {}

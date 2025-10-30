@@ -1,0 +1,13 @@
+@use "../abstracts/variables" as vars;
+
+@mixin base-container {
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  height: 100vh;
+  padding: 2rem;
+  background: vars.$bg-light;
+  z-index: 0;
+}
+

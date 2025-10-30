@@ -1,0 +1,5 @@
+{
+  "name": "@neatnest/common",
+  "description": "common files to all pages",
+  "main": "index.ts"
+}

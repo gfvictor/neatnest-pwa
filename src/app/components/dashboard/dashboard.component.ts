@@ -2,18 +2,33 @@ import { Component } from "@angular/core";
 import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { trigger, transition, style, animate } from "@angular/animations";
+import { ArrowsComponent, FooterComponent, LogoComponent } from "@neatnest/common";
 
 @Component({
   selector: "app-dashboard",
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [CommonModule, LogoComponent, FooterComponent, ArrowsComponent],
   templateUrl: "./dashboard.component.html",
-  styleUrl: "./dashboard.component.css",
+  styleUrls: ["../../../scss/pages/_dashboard.scss"],
+  animations: [
+    trigger("fadeInOut", [
+      transition(":enter", [
+        style({ opacity: 0, transform: "translateY(6px)" }),
+        animate("500ms ease-out", style({ opacity: 1, transform: "translateY(0)" })),
+      ]),
+      transition(":leave", [
+        animate("500ms ease-in", style({ opacity: 0, transform: "translateY(-6px)" })),
+      ]),
+    ]),
+  ],
 })
 export class DashboardComponent {
   homeUse: boolean = false;
   workUse: boolean = false;
   isLoading: boolean = false;
+  isFadingOut: boolean = false;
+  currentUser: string = "";
 
   constructor(
     private router: Router,
@@ -33,11 +48,13 @@ export class DashboardComponent {
       .get<{
         homeUse: boolean;
         workUse: boolean;
+        name: string;
       }>("https://neatnest.vercel.app/user/current", { headers })
       .subscribe({
         next: (user) => {
           this.homeUse = user.homeUse;
           this.workUse = user.workUse;
+          this.currentUser = user.name || "Usuário";
           this.isLoading = false;
         },
         error: (err) => {
@@ -53,12 +70,17 @@ export class DashboardComponent {
       });
   }
 
+  private navigateWithFade(target: string): void {
+    this.isFadingOut = true;
+    setTimeout(() => void this.router.navigate([target]), 260);
+  }
+
   goToHousehold(): void {
-    void this.router.navigate(["/household"]);
+    void this.navigateWithFade("/household");
   }
 
   goToWorkplace(): void {
-    void this.router.navigate(["/workplace"]);
+    void this.navigateWithFade("/workplace");
   }
 
   logout(): void {
@@ -77,12 +99,12 @@ export class DashboardComponent {
       next: () => {
         localStorage.removeItem("token");
         this.isLoading = false;
-        void this.router.navigate(["/login"]);
+        void this.navigateWithFade("/login");
       },
       error: (err) => {
         localStorage.removeItem("token");
         this.isLoading = false;
-        void this.router.navigate(["/login"]);
+        void this.navigateWithFade("/login");
       },
     });
   }

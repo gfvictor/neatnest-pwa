@@ -3,13 +3,14 @@ import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { Router } from "@angular/router";
 
 @Component({
-  selector: "app-home",
+  selector: "app-splash",
   standalone: true,
   imports: [CommonModule, NgOptimizedImage],
-  templateUrl: "./home.component.html",
+  templateUrl: "./splash.component.html",
 })
-export class HomeComponent {
+export class SplashComponent {
   isFadingOut: false | any;
+
   constructor(private router: Router) {}
 
   ngOnInit() {

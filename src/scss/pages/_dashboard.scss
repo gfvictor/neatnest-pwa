@@ -1,6 +1,36 @@
-.dashboard-options,
-.dashboard-logout {
-  display: flex;
-  justify-content: center;
-  padding: 1rem;
+@use "../abstracts/variables" as vars;
+@use "../mixins/container" as *;
+
+.dashboard-container {
+  @include base-container;
+  grid-template-rows: 0.5fr 0.5fr 1fr 3.5fr 3fr 1fr;
+  grid-template-areas: "logo" "greet" "intro" "content" "logout" "footer";
+  min-height: 100vh;
+
+  .dashboard-options {
+    grid-area: content;
+    display: grid;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .dashboard-greet {
+    grid-area: greet;
+    margin-top: 1rem;
+
+    span {
+      color: vars.$username-light;
+    }
+  }
+
+  .dashboard-intro {
+    grid-area: intro;
+    margin-top: 6rem;
+    font-size: 1.5rem;
+  }
+
+  .dashboard-logout{
+    grid-area: logout;
+    align-self: end;
+  }
 }

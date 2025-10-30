@@ -1,0 +1,5 @@
+{
+  "name": "@neatnest/services",
+  "description": "frontend service files",
+  "main": "index.ts"
+}
