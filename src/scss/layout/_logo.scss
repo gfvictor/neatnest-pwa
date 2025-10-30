@@ -1,0 +1,11 @@
+.logo-container {
+  display: grid;
+  position: relative;
+  justify-content: center;
+
+  img {
+    display: block;
+    width: 120px;
+    height: auto;
+  }
+}
