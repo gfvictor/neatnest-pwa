@@ -1,12 +1,13 @@
 .bg-arrows {
   position: fixed;
-  bottom: 0;
+  bottom: 10%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-10%);
   width: 100%;
   max-width: 1200px;
   opacity: 45%;
   pointer-events: none;
+  z-index: -1;
 
   img {
     display: block;
