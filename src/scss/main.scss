@@ -6,8 +6,10 @@
 @use "components/buttons";
 
 @use "layout/footer";
+@use "layout/logo";
 
 @use "mixins/loading";
+@use "mixins/container";
 
 @use "pages/home";
 @use "pages/login";
