@@ -35,8 +35,13 @@
   }
 
   .login-logo {
+    display: grid;
+    position: relative;
+    justify-content: center;
+
     img {
-      width: 350px;
+      display: block;
+      width: 20rem;
       height: auto;
     }
   }

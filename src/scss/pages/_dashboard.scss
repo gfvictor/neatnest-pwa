@@ -3,34 +3,35 @@
 
 .dashboard-container {
   @include base-container;
-  grid-template-rows: 0.5fr 0.5fr 1fr 3.5fr 3fr 1fr;
-  grid-template-areas: "logo" "greet" "intro" "content" "logout" "footer";
+  grid-template-rows: 0.5fr 0.5fr 1fr 3.5fr 3fr auto;
   min-height: 100vh;
 
   .dashboard-options {
-    grid-area: content;
     display: grid;
     justify-content: center;
     padding: 1rem;
   }
 
   .dashboard-greet {
-    grid-area: greet;
     margin-top: 1rem;
+    transition: all 0.3s ease-in-out;
 
-    span {
-      color: vars.$username-light;
+    .greet-name {
+      color: vars.$blue-light;
+      transition: all 0.3s ease-in-out;
+
+      &.sayo {
+        color: vars.$pink-light;
+      }
     }
   }
 
   .dashboard-intro {
-    grid-area: intro;
     margin-top: 6rem;
     font-size: 1.5rem;
   }
 
   .dashboard-logout{
-    grid-area: logout;
-    align-self: end;
+    //align-self: end;
   }
 }

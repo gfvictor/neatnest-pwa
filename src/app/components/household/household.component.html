@@ -1,38 +1,45 @@
-<div class="login-container">
+<div class="household-container" @fadeInOut>
   <app-logo></app-logo>
 
-  <h1>Household</h1>
+  <div class="content-container">
+    <h1 class="household-title">Casa</h1>
 
-  <div style="margin-top: 1.25rem; width: 100%; max-width: 360px; text-align: left">
-    <h2 style="margin-bottom: 0.5rem">Rooms</h2>
+    <h2 class="household-subtitle">
+      Cômodos listados: <span class="household-quantity">{{ rooms.length }}</span>
+    </h2>
 
     <ng-container *ngIf="!isLoading && rooms.length === 0">
-      <p>No rooms yet.</p>
+      <p>Nenhum cômodo encontrado.</p>
     </ng-container>
 
-    <ul style="list-style: none; padding: 0; margin: 0">
-      <li *ngFor="let r of rooms" style="padding: 0.5rem 0; border-bottom: 1px solid #ddd">
-        <button type="button" (click)="openRoom(r)">
-          {{ r.name }}
-        </button>
-      </li>
-    </ul>
+    <div class="household-list-container">
+      <ul class="household-list" *ngIf="!isLoading" @fadeInOut>
+        <li class="household-list-items" *ngFor="let r of rooms">
+          <button class="btn-household-list" type="button" (click)="openRoom(r)">
+            <span class="list-item">{{ r.name }}</span>
+          </button>
+          <button class="btn-delete" type="button" (click)="deleteRoom(r.id)">x</button>
+        </li>
+      </ul>
+
+      <div class="scroll-indicator" *ngIf="rooms.length > 6"></div>
+    </div>
   </div>
 
-  <form (ngSubmit)="createRoom()" style="margin-top: 1rem">
-    <label for="roomName">New room name</label>
+  <form class="household-form" (ngSubmit)="createRoom()">
+    <label for="roomName">Nome do novo cômodo</label>
     <input id="roomName" type="text" [(ngModel)]="newRoomName" name="roomName" required />
 
     <button type="submit" [disabled]="isLoading || !newRoomName.trim()">
-      {{ isLoading ? "Loading..." : "Create Room" }}
+      {{ isLoading ? "Carregando..." : "Adicionar" }}
     </button>
   </form>
 
   <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-  <div style="margin-bottom: 1.25rem">
-    <button type="button" (click)="goBack()" [disabled]="isLoading">
-      {{ isLoading ? "Loading..." : "Back" }}
+  <div>
+    <button class="btn-back" type="button" (click)="goBack()" [disabled]="isLoading">
+      {{ isLoading ? "Carregando..." : "Voltar" }}
     </button>
   </div>
 

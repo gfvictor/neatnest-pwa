@@ -2,10 +2,11 @@
   display: grid;
   position: relative;
   justify-content: center;
+  margin: 0.25rem auto 2rem auto;
 
   img {
     display: block;
-    width: 120px;
+    width: 100px;
     height: auto;
   }
 }

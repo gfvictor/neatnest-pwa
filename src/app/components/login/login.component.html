@@ -1,5 +1,5 @@
 <div class="login-container">
-  <div class="logo-container login-logo">
+  <div class="login-logo">
     <img
       ngSrc="assets/logos/neatnest-logo.svg"
       width="350"
@@ -24,7 +24,7 @@
     />
 
     <button ngtype="submit" [disabled]="isLoading">
-      {{ isLoading ? "Loading..." : "Login" }}
+      {{ isLoading ? "Carregando..." : "Entrar" }}
     </button>
 
     <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
