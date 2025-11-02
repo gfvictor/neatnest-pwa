@@ -3,7 +3,7 @@ import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { ApiService } from "@neatnest/services";
-import {ArrowsComponent, FooterComponent, fadeInOut} from "@neatnest/common";
+import { ArrowsComponent, FooterComponent, fadeInOut } from "@neatnest/common";
 
 @Component({
   selector: "app-login",
@@ -11,7 +11,7 @@ import {ArrowsComponent, FooterComponent, fadeInOut} from "@neatnest/common";
   imports: [CommonModule, FormsModule, NgOptimizedImage, FooterComponent, ArrowsComponent],
   templateUrl: "./login.component.html",
   styleUrls: ["../../../scss/pages/_login.scss"],
-  animations: [fadeInOut]
+  animations: [fadeInOut],
 })
 export class LoginComponent {
   identifier: string = "";
@@ -36,7 +36,7 @@ export class LoginComponent {
         const refresh: string = response?.refresh_token;
 
         if (!access) {
-          this.errorMessage = "Login error: missing token.";
+          this.errorMessage = "Erro de login: token vazio";
           this.isLoading = false;
           return;
         }
@@ -49,7 +49,7 @@ export class LoginComponent {
         }, 100);
       },
       error: () => {
-        this.errorMessage = "Login error. Verify your credentials.";
+        this.errorMessage = "Erro ao logar. Verifique suas credenciais.";
         this.isLoading = false;
       },
     });
