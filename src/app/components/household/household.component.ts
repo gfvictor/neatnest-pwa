@@ -1,15 +1,17 @@
 import { Component } from "@angular/core";
-import { CommonModule, NgOptimizedImage } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { HouseholdApiService, HouseholdRelations, Room, RoomApiService } from "@neatnest/services";
-import { ArrowsComponent, FooterComponent, LogoComponent } from "@neatnest/common";
+import { ArrowsComponent, FooterComponent, LogoComponent, fadeInOut } from "@neatnest/common";
 
 @Component({
   selector: "app-household",
   standalone: true,
   imports: [CommonModule, FormsModule, LogoComponent, FooterComponent, ArrowsComponent],
   templateUrl: "./household.component.html",
+  styleUrls: ["../../../scss/pages/_household.scss"],
+  animations: [fadeInOut],
 })
 export class HouseholdComponent {
   household: HouseholdRelations | null = null;
@@ -17,7 +19,7 @@ export class HouseholdComponent {
   errorMessage: string = "";
   isLoading: boolean = false;
 
-  newRoomName = "";
+  newRoomName: string = "";
 
   constructor(
     private router: Router,
@@ -43,14 +45,14 @@ export class HouseholdComponent {
             this.isLoading = false;
           },
           error: (err) => {
-            this.errorMessage = "Failed to load rooms.";
+            this.errorMessage = "Falha ao carregar Cômodos.";
             this.isLoading = false;
             console.error(err);
           },
         });
       },
       error: (err) => {
-        this.errorMessage = "Failed to load Household.";
+        this.errorMessage = "Falha ao carregar Casa.";
         this.isLoading = false;
         console.error(err);
       },
@@ -70,7 +72,24 @@ export class HouseholdComponent {
         this.isLoading = false;
       },
       error: (err) => {
-        this.errorMessage = "Failed to create Room.";
+        this.errorMessage = "Falha ao criar Cômodo.";
+        this.isLoading = false;
+        console.error(err);
+      },
+    });
+  }
+
+  deleteRoom(id: string): void {
+    this.isLoading = true;
+    this.errorMessage = "";
+
+    this.roomApi.delete(id).subscribe({
+      next: () => {
+        this.rooms = this.rooms.filter((r: Room): boolean => r.id !== id);
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.errorMessage = "Falha ao deletar Cômodo.";
         this.isLoading = false;
         console.error(err);
       },
