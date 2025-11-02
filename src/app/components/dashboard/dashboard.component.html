@@ -2,26 +2,26 @@
   <app-logo></app-logo>
 
   <div class="dashboard-greet">
-      <h1>
-          Bem vind{{ currentUser === "Sayo" ? "a" : "o" }},
-          <span>{{ currentUser }}</span>
-      </h1>
+    <h1 *ngIf="!isLoading" @fadeInOut>
+      Bem vind{{ currentUser === "Sayo" ? "a" : "o" }},
+      <span class="greet-name" [class.sayo]="currentUser === 'Sayo'">
+        {{ currentUser }}
+      </span>
+    </h1>
   </div>
 
-    <div class="dashboard-intro">
-        <p>
-            O que você quer de organizar?
-        </p>
-    </div>
+  <div class="dashboard-intro">
+    <p>O que você quer organizar?</p>
+  </div>
 
   <div class="dashboard-options" style="position: relative; z-index: 1">
     <button type="button" (click)="goToHousehold()">
-      {{ isLoading ? "Carregando" : "Casa" }}
+      {{ isLoading ? "Carregando..." : "Casa" }}
     </button>
 
     <div>
-      <button type="button" (click)="goToWorkplace()">
-        {{ isLoading ? "Carregando" : "Trabalho" }}
+      <button type="button" (click)="goToWorkplace()" disabled>
+        {{ isLoading ? "Carregando..." : "Trabalho" }}
       </button>
     </div>
   </div>
