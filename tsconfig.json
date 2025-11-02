@@ -6,7 +6,8 @@
     "baseUrl": "src",
     "paths": {
       "@neatnest/services": ["app/services/index.ts"],
-      "@neatnest/common": ["app/common/index.ts"]
+      "@neatnest/common": ["app/common/index.ts"],
+      "@neatnest/environments": ["environments/index.ts"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,
