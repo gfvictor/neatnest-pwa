@@ -3,6 +3,7 @@
 
 .login-container {
   @include base-container;
+  width: 100vw;
 
   h1 {
     margin-bottom: 1.5rem;
