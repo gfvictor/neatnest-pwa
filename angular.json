@@ -23,12 +23,7 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "polyfills": ["zone.js"],
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/assets/manifest.webmanifest",
-              "src/_redirects"
-            ],
+            "assets": ["src/favicon.ico", "src/assets", "src/_redirects", "src/manifest.json"],
             "styles": [
               "@angular/material/prebuilt-themes/magenta-violet.css",
               "src/scss/main.scss"
