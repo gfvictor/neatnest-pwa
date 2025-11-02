@@ -14,6 +14,7 @@ button {
   font-size: 2rem;
   font-weight: vars.$font-regular;
   cursor: pointer;
+  overflow: visible;
   transition: all 0.3s ease-in-out;
 
   &::before {
@@ -59,22 +60,55 @@ button {
       opacity: 0.6;
     }
   }
-}
 
-button.btn-logout {
-  position: relative;
-  padding: 0.75rem 2rem;
-  justify-self: end;
-  font-size: 1rem;
+  &.btn-logout,
+  &.btn-back {
+    position: relative;
+    padding: 0.75rem 2rem;
+    justify-self: end;
+    font-size: 1rem;
 
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 -5px 0;
-    border-radius: 0.8rem;
-    background: vars.$disabled-light;
-    opacity: 0.6;
-    transition: all 0.3s ease-in-out;
-    z-index: -1;
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 -5px 0;
+      border-radius: 0.8rem;
+      background: vars.$disabled-light;
+      opacity: 0.6;
+      transition: all 0.3s ease-in-out;
+      z-index: -1;
+    }
+  }
+
+  &.btn-household-list {
+    width: 100%;
+    max-width: 300px;
+    height: 100%;
+    min-height: 50px;
+    padding: 0.25rem 4rem;
+    margin: 0 auto 0.75rem auto;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  &.btn-delete {
+    background: vars.$button-light;
+    border: none;
+    max-width: 50px;
+    color: vars.$error-light;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+
+    &::before {
+      content: "";
+      background: transparent;
+    }
+
+    &:hover {
+      color: vars.$error-dark;
+    }
   }
 }
