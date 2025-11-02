@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { trigger, transition, style, animate } from "@angular/animations";
 import { ArrowsComponent, FooterComponent, LogoComponent } from "@neatnest/common";
+import {environment} from "@neatnest/environments";
 
 @Component({
   selector: "app-dashboard",
@@ -49,7 +50,7 @@ export class DashboardComponent {
         homeUse: boolean;
         workUse: boolean;
         name: string;
-      }>("https://neatnest.vercel.app/user/current", { headers })
+      }>(`${environment.apiUrl}/user/current`, { headers })
       .subscribe({
         next: (user) => {
           this.homeUse = user.homeUse;
@@ -95,7 +96,7 @@ export class DashboardComponent {
 
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
-    this.http.post("https://neatnest.vercel.app/auth/logout", {}, { headers }).subscribe({
+    this.http.post(`${environment.apiUrl}/auth/logout`, {}, { headers }).subscribe({
       next: () => {
         localStorage.removeItem("token");
         this.isLoading = false;

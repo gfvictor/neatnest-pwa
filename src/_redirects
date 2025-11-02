@@ -1,2 +1,2 @@
-/api/* https://neatnest.vercel.app/:splat 200
+/api/* https://neatnest-api.onrender.com/:splat 200
 /* /index.html 200

@@ -1,0 +1,5 @@
+{
+  "name": "@neatnest/environments",
+  "description": "Production and development environments",
+  "main": "index.ts"
+}
