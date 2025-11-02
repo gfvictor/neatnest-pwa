@@ -48,9 +48,9 @@
     </ul>
   </div>
 
-  <div style="margin-bottom: 1.25rem">
-    <button type="button" (click)="backToHousehold()" [disabled]="isLoading">
-      {{ isLoading ? "Loading..." : "Back" }}
+  <div>
+    <button class="btn-back" type="button" (click)="backToHousehold()" [disabled]="isLoading">
+      {{ isLoading ? "Carregando..." : "Voltar" }}
     </button>
   </div>
 
