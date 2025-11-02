@@ -2,7 +2,7 @@
   "name": "NeatNest",
   "short_name": "NeNe",
   "description": "Casa e trabalho organizados",
-  "start_url": "./",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#fafafa",
   "theme_color": "#fafafa",
