@@ -1,10 +1,9 @@
 import { Component } from "@angular/core";
-import { CommonModule, NgOptimizedImage } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { trigger, transition, style, animate } from "@angular/animations";
-import { ArrowsComponent, FooterComponent, LogoComponent } from "@neatnest/common";
-import {environment} from "@neatnest/environments";
+import { ArrowsComponent, FooterComponent, LogoComponent, fadeInOut } from "@neatnest/common";
+import { environment } from "@neatnest/environments";
 
 @Component({
   selector: "app-dashboard",
@@ -12,23 +11,12 @@ import {environment} from "@neatnest/environments";
   imports: [CommonModule, LogoComponent, FooterComponent, ArrowsComponent],
   templateUrl: "./dashboard.component.html",
   styleUrls: ["../../../scss/pages/_dashboard.scss"],
-  animations: [
-    trigger("fadeInOut", [
-      transition(":enter", [
-        style({ opacity: 0, transform: "translateY(6px)" }),
-        animate("500ms ease-out", style({ opacity: 1, transform: "translateY(0)" })),
-      ]),
-      transition(":leave", [
-        animate("500ms ease-in", style({ opacity: 0, transform: "translateY(-6px)" })),
-      ]),
-    ]),
-  ],
+  animations: [fadeInOut],
 })
 export class DashboardComponent {
   homeUse: boolean = false;
   workUse: boolean = false;
   isLoading: boolean = false;
-  isFadingOut: boolean = false;
   currentUser: string = "";
 
   constructor(
@@ -71,17 +59,12 @@ export class DashboardComponent {
       });
   }
 
-  private navigateWithFade(target: string): void {
-    this.isFadingOut = true;
-    setTimeout(() => void this.router.navigate([target]), 260);
-  }
-
   goToHousehold(): void {
-    void this.navigateWithFade("/household");
+    void this.router.navigate(["/household"]);
   }
 
   goToWorkplace(): void {
-    void this.navigateWithFade("/workplace");
+    void this.router.navigate(["/workplace"]);
   }
 
   logout(): void {
@@ -100,12 +83,12 @@ export class DashboardComponent {
       next: () => {
         localStorage.removeItem("token");
         this.isLoading = false;
-        void this.navigateWithFade("/login");
+        void this.router.navigate(["/login"]);
       },
-      error: (err) => {
+      error: () => {
         localStorage.removeItem("token");
         this.isLoading = false;
-        void this.navigateWithFade("/login");
+        void this.router.navigate(["/login"]);
       },
     });
   }
