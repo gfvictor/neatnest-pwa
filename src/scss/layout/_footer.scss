@@ -1,7 +1,11 @@
 @use "../abstracts/variables" as vars;
 
 footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   color: vars.$main-light;
-  font-size: 0.75rem;
+  font-size: 0.5rem;
   pointer-events: none;
 }
