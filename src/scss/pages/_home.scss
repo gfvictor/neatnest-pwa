@@ -1,4 +1,4 @@
-@use '../abstracts/variables' as vars;
+@use "../abstracts/variables" as vars;
 
 .home-container {
   display: grid;
@@ -9,7 +9,7 @@
   padding: 1.25rem;
   text-align: center;
   background: vars.$bg-light;
-  transition: all .8s ease-in-out;
+  transition: all 0.8s ease-in-out;
 
   &.fade-out {
     opacity: 0;
@@ -20,7 +20,7 @@
   display: grid;
   place-items: center;
   width: 100%;
-  max-width: 600px;
+  max-width: 400px;
 
   img {
     width: 100%;
