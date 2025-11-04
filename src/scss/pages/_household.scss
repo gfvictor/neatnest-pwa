@@ -32,7 +32,7 @@
       padding-right: 0.5rem;
 
       &::-webkit-scrollbar {
-        width: 5px;
+        width: 4px;
       }
 
       &::-webkit-scrollbar-track {
@@ -40,13 +40,13 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        background: rgba(0, 0, 0, 0.8);
-        border-radius: 3px;
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
       }
 
       .household-list {
         list-style: none;
-        padding: 0 6rem;
+        padding: 0 1rem;
         margin: 0.25rem;
         justify-content: center;
         display: grid;
@@ -59,7 +59,7 @@
           padding: 0.5rem 0;
           display: grid;
           align-items: center;
-          gap: 1rem;
+          gap: 2rem;
           grid-template-columns: 1fr auto;
           grid-auto-rows: minmax(60px, auto);
         }
