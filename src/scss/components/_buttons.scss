@@ -80,7 +80,8 @@ button {
     }
   }
 
-  &.btn-household-list {
+  &.btn-household-list,
+  &.btn-room-list {
     width: 100%;
     max-width: 300px;
     height: 100%;
