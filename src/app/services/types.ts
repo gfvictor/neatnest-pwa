@@ -55,7 +55,7 @@ export interface Section {
 export interface Container {
   id: UUID;
   name: string;
-  number: number;
+  number?: number;
   image?: string | null;
   roomId?: UUID | null;
   sectionId?: UUID | null;
