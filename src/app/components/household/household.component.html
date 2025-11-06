@@ -27,8 +27,10 @@
   </div>
 
   <form class="household-form" (ngSubmit)="createRoom()">
-    <label for="roomName">Nome do novo cômodo</label>
-    <input id="roomName" type="text" [(ngModel)]="newRoomName" name="roomName" required />
+    <div class="household-form-input">
+      <label for="roomName">Nome do novo cômodo</label>
+      <input id="roomName" type="text" [(ngModel)]="newRoomName" name="roomName" required />
+    </div>
 
     <button type="submit" [disabled]="isLoading || !newRoomName.trim()">
       {{ isLoading ? "Carregando..." : "Adicionar" }}

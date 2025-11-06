@@ -1,52 +1,60 @@
-<div class="login-container">
-<app-logo></app-logo>
+<div class="room-container">
+  <app-logo></app-logo>
 
-  <h1 *ngIf="room">{{ room.name }}</h1>
+  <div class="content-container">
+    <h1 class="room-title" *ngIf="room">{{ room.name }}</h1>
 
-  <form (ngSubmit)="createContainer()" style="margin-top: 1rem">
-    <label for="containerName">New container name</label>
-    <input
-      id="containerName"
-      type="text"
-      [(ngModel)]="newContainerName"
-      name="containerName"
-      required
-    />
+    <h2 class="room-subtitle">
+      Containers listados: <span class="room-quantity">{{ containers.length }}</span>
+    </h2>
 
-    <label for="containerNumber">Number</label>
-    <input
-      id="containerNumber"
-      type="number"
-      [(ngModel)]="newContainerNumber"
-      name="containerNumber"
-      required
-      min="0"
-      step="1"
-    />
+    <ng-container *ngIf="!isLoading && containers.length === 0">
+      <p>Nenhum container encontrado.</p>
+    </ng-container>
 
-    <button
-      type="submit"
-      [disabled]="isLoading || !newContainerName.trim() || newContainerNumber == null"
-    >
-      {{ isLoading ? "Loading..." : "Create Container" }}
+    <div class="room-list-container">
+      <ul class="room-list">
+        <li class="room-list-items" *ngFor="let c of containers">
+          <button class="btn-room-list" type="button" (click)="openContainer(c)">
+            <span class="list item">{{ c.name }} {{ c.number }}</span>
+          </button>
+          <button class="btn-delete" type="button" (click)="deleteContainer(c.id)">X</button>
+        </li>
+      </ul>
+
+      <div class="scroll-indicator" *ngIf="containers.length > 4"></div>
+    </div>
+  </div>
+
+  <form class="room-form" (ngSubmit)="createContainer()">
+    <div class="room-form-input">
+      <label for="containerName">Nome do novo container</label>
+      <input
+        id="containerName"
+        type="text"
+        [(ngModel)]="newContainerName"
+        name="containerName"
+        required
+      />
+
+      <label for="containerNumber">Número</label>
+      <input
+        id="containerNumber"
+        type="number"
+        [(ngModel)]="newContainerNumber"
+        name="containerNumber"
+        required
+        min="0"
+        step="1"
+      />
+    </div>
+
+    <button type="submit" [disabled]="isLoading || !newContainerName.trim()">
+      {{ isLoading ? "Carregando..." : "Adicionar" }}
     </button>
   </form>
 
   <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
-
-  <div style="margin-top: 1.25rem; width: 100%; max-width: 360px; text-align: left">
-    <h2 style="margin-bottom: 0.5rem">Containers</h2>
-
-    <ng-container *ngIf="!isLoading && containers.length === 0">
-      <p>No containers yet.</p>
-    </ng-container>
-
-    <ul style="list-style: none; padding: 0; margin: 0">
-      <li *ngFor="let c of containers" style="padding: 0.5rem 0; border-bottom: 1px solid #ddd">
-        <button type="button" (click)="openContainer(c)">{{ c.name }} — #{{ c.number }}</button>
-      </li>
-    </ul>
-  </div>
 
   <div>
     <button class="btn-back" type="button" (click)="backToHousehold()" [disabled]="isLoading">
@@ -54,6 +62,6 @@
     </button>
   </div>
 
-<app-arrows></app-arrows>
-<app-footer></app-footer>
+  <app-arrows></app-arrows>
+  <app-footer></app-footer>
 </div>

@@ -1,7 +1,7 @@
 @use "../abstracts/variables" as vars;
 @use "../mixins/container" as *;
 
-.household-container {
+.room-container {
   @include base-container;
   grid-template-rows: auto 2fr 1fr 0.5fr auto auto 0;
   gap: 0.5rem;
@@ -13,19 +13,19 @@
     overflow: hidden;
     scroll-behavior: smooth;
 
-    .household-title {
+    .room-title {
       margin-top: 2rem;
     }
 
-    .household-subtitle {
+    .room-subtitle {
       margin-top: 1rem;
 
-      .household-quantity {
+      .room-quantity {
         color: vars.$text-light;
       }
     }
 
-    .household-list-container {
+    .room-list-container {
       max-height: 28vh;
       overflow-y: auto;
       margin-bottom: 3rem;
@@ -44,42 +44,46 @@
         border-radius: 4px;
       }
 
-      .household-list {
+      .room-list {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: minmax(60px, auto);
         list-style: none;
         padding: 0 1rem;
         margin: 0.25rem;
         justify-content: center;
-        display: grid;
         gap: 0.5rem;
-        grid-template-columns: repeat(1, 1fr);
-        grid-auto-rows: minmax(60px, auto);
 
-        .household-list-items {
-          border-bottom: none;
-          padding: 0.5rem 0;
+        .room-list-items {
           display: grid;
-          align-items: center;
-          gap: 2rem;
           grid-template-columns: 1fr auto;
           grid-auto-rows: minmax(60px, auto);
+          border-bottom: none;
+          padding: 0.5rem 0;
+          align-items: center;
+          gap: 2rem;
         }
       }
     }
   }
 
-  .household-form {
+  .room-form {
     margin-top: 1.5rem;
     max-width: 320px;
 
-    .household-form-input {
+    .room-form-input {
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
     }
 
+    label {
+      margin-top: 0.5rem;
+    }
+
     input {
       width: 100%;
-      margin-top: 0.5rem;
+      margin: 0.5rem 0;
       padding: 0.75rem;
       border: none;
       border-bottom: 2px solid vars.$main-dark;
@@ -88,11 +92,5 @@
       border-radius: 0.5rem;
       font-size: 0.875rem;
     }
-  }
-
-  .error-message {
-    grid-column: 1 / -1;
-    text-align: center;
-    color: vars.$error-light;
   }
 }
