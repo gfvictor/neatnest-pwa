@@ -3,7 +3,7 @@ import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { Room, RoomApiService, Container, ContainerApiService } from "@neatnest/services";
-import {ArrowsComponent, FooterComponent, LogoComponent} from "@neatnest/common";
+import { ArrowsComponent, FooterComponent, LogoComponent } from "@neatnest/common";
 
 @Component({
   selector: "app-room",
@@ -21,7 +21,7 @@ export class RoomComponent {
   containers: Container[] = [];
 
   newContainerName: string = "";
-  newContainerNumber: number | null = null;
+  newContainerNumber: number | undefined = undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,7 +33,7 @@ export class RoomComponent {
   ngOnInit(): void {
     this.roomId = this.route.snapshot.paramMap.get("id") ?? "";
     if (!this.roomId) {
-      this.errorMessage = "Invalid room id.";
+      this.errorMessage = "Cômodo com ID inválido.";
       this.isLoading = false;
       return;
     }
@@ -53,44 +53,64 @@ export class RoomComponent {
             this.containers = (all ?? []).filter((c) => c.roomId === this.roomId);
             this.isLoading = false;
           },
-          error: (err): void => {
-            this.errorMessage = `Failed to load containers (${err?.status ?? "??"}).`;
+          error: (): void => {
+            this.errorMessage = "Falha ao carregar Containers.";
             this.isLoading = false;
           },
         });
       },
-      error: (err): void => {
-        this.errorMessage = `Failed to load room (${err?.status ?? "??"}).`;
+      error: (): void => {
+        this.errorMessage = "Falha ao carregar Cômodo.";
         this.isLoading = false;
       },
     });
   }
 
   createContainer(): void {
-    if (!this.newContainerName.trim() || this.newContainerNumber == null) return;
+    const containerName: string = this.newContainerName.trim();
+    if (!containerName) return;
 
     this.isLoading = true;
     this.errorMessage = "";
 
-    this.containerApi
-      .createInRoom(this.roomId, this.newContainerName.trim(), this.newContainerNumber)
-      .subscribe({
-        next: (created) => {
-          this.containers = [created, ...this.containers];
+    const containerNumber =
+      this.newContainerNumber !== null && this.newContainerNumber !== undefined
+        ? this.newContainerNumber
+        : undefined;
 
-          this.newContainerName = "";
-          this.newContainerNumber = null;
-          this.isLoading = false;
-        },
-        error: (err): void => {
-          this.errorMessage = `Failed to create container (${err?.status ?? "??"}).`;
-          this.isLoading = false;
-        },
-      });
+    this.containerApi.createInRoom(this.roomId, containerName, containerNumber).subscribe({
+      next: (created) => {
+        this.containers = [created, ...this.containers];
+
+        this.newContainerName = "";
+        this.newContainerNumber = undefined;
+        this.isLoading = false;
+      },
+      error: (): void => {
+        this.errorMessage = "Falha ao criar Container.";
+        this.isLoading = false;
+      },
+    });
+  }
+
+  deleteContainer(id: string): void {
+    this.isLoading = true;
+    this.errorMessage = "";
+
+    this.containerApi.delete(id).subscribe({
+      next: () => {
+        this.containers = this.containers.filter((c: Container): boolean => c.id !== id);
+        this.isLoading = false;
+      },
+      error: () => {
+        this.errorMessage = "Falha ao deletar Container.";
+        this.isLoading = false;
+      },
+    });
   }
 
   openContainer(c: Container): void {
-    void this.router.navigate([`/container/${c.id}`]);
+    void this.router.navigate(["/container", c.id]);
   }
 
   backToHousehold(): void {
