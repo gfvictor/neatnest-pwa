@@ -44,17 +44,15 @@ export class HouseholdComponent {
             this.rooms = rooms;
             this.isLoading = false;
           },
-          error: (err) => {
+          error: () => {
             this.errorMessage = "Falha ao carregar Cômodos.";
             this.isLoading = false;
-            console.error(err);
           },
         });
       },
-      error: (err) => {
+      error: () => {
         this.errorMessage = "Falha ao carregar Casa.";
         this.isLoading = false;
-        console.error(err);
       },
     });
   }
@@ -66,15 +64,14 @@ export class HouseholdComponent {
     this.errorMessage = "";
 
     this.roomApi.create(this.newRoomName.trim()).subscribe({
-      next: (room: Room) => {
-        this.rooms = [room, ...this.rooms];
+      next: (r: Room) => {
+        this.rooms = [r, ...this.rooms];
         this.newRoomName = "";
         this.isLoading = false;
       },
-      error: (err) => {
+      error: () => {
         this.errorMessage = "Falha ao criar Cômodo.";
         this.isLoading = false;
-        console.error(err);
       },
     });
   }
@@ -88,16 +85,15 @@ export class HouseholdComponent {
         this.rooms = this.rooms.filter((r: Room): boolean => r.id !== id);
         this.isLoading = false;
       },
-      error: (err) => {
+      error: () => {
         this.errorMessage = "Falha ao deletar Cômodo.";
         this.isLoading = false;
-        console.error(err);
       },
     });
   }
 
-  openRoom(room: Room): void {
-    void this.router.navigate(["/room", room.id]);
+  openRoom(r: Room): void {
+    void this.router.navigate(["/room", r.id]);
   }
 
   goBack(): void {
