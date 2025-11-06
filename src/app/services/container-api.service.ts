@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../environments/environment";
+import { environment } from "@neatnest/environments";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import type { Container, ContainerObjects } from "./types";
@@ -31,7 +31,7 @@ export class ContainerApiService {
     });
   }
 
-  createInRoom(roomId: string, name: string, number: number): Observable<ContainerObjects> {
+  createInRoom(roomId: string, name: string, number?: number): Observable<ContainerObjects> {
     return this.http.post<Container>(
       `${this.apiUrl}/container`,
       { roomId, name, number },

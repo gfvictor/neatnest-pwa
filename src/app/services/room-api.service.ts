@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "../../environments/environment";
+import { environment } from "@neatnest/environments";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import type { Room, RoomContainers } from "./types";
