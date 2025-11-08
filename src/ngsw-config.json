@@ -14,19 +14,19 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
-        "files": ["/assets/**"]
+        "files": ["/assets/**", "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"]
       }
     }
   ],
   "dataGroups": [
     {
-      "name": "api-calls",
-      "urls": ["https://neatnest-api-twqwo.ondigitalocean.app"],
+      "name": "api-fresh",
+      "urls": ["https://neatnest-api-twqwo.ondigitalocean.app/**"],
       "cacheConfig": {
-        "strategy": "performance",
-        "maxSize": 50,
-        "maxAge": "1d",
-        "timeout": "10s"
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "30s",
+        "timeout": "5s"
       }
     }
   ]
