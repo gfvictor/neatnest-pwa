@@ -1,24 +1,28 @@
 <div class="household-container" @fadeInOut>
   <app-logo></app-logo>
 
-  <div class="content-container">
-    <h1 class="household-title">Casa</h1>
+  <div *ngIf="isLoading">
+    <p>Carregando...</p>
+  </div>
 
-    <h2 class="household-subtitle">
-      Cômodos listados: <span class="household-quantity">{{ rooms.length }}</span>
+  <div class="content-container" *ngIf="!isLoading" @fadeInOut>
+    <h1 class="page-title">Casa</h1>
+
+    <h2 class="page-subtitle" *ngIf="!isLoading" @fadeInOut>
+      Cômodos listados: <span class="page-quantity">{{ rooms.length }}</span>
     </h2>
 
-    <ng-container *ngIf="!isLoading && rooms.length === 0">
+    <ng-container *ngIf="!isLoading && rooms.length === 0" @fadeInOut>
       <p>Nenhum cômodo encontrado.</p>
     </ng-container>
 
-    <div class="household-list-container">
-      <ul class="household-list" *ngIf="!isLoading" @fadeInOut>
-        <li class="household-list-items" *ngFor="let r of rooms">
+    <div class="page-list-container" *ngIf="!isLoading" @fadeInOut>
+      <ul class="page-list" *ngIf="!isLoading" @fadeInOut>
+        <li class="page-list-items" *ngFor="let r of rooms">
           <button class="btn-household-list" type="button" (click)="openRoom(r)">
             <span class="list-item">{{ r.name }}</span>
           </button>
-          <button class="btn-delete" type="button" (click)="deleteRoom(r.id)">X</button>
+          <button class="btn-delete" type="button" (click)="deleteRoom(r.id, r.name)">X</button>
         </li>
       </ul>
 
@@ -26,10 +30,16 @@
     </div>
   </div>
 
-  <form class="household-form" (ngSubmit)="createRoom()">
-    <div class="household-form-input">
-      <label for="roomName">Nome do novo cômodo</label>
-      <input id="roomName" type="text" [(ngModel)]="newRoomName" name="roomName" required />
+  <form class="page-form" (ngSubmit)="createRoom()">
+    <div class="page-form-input">
+      <input
+        id="roomName"
+        type="text"
+        [(ngModel)]="newRoomName"
+        name="roomName"
+        placeholder="Nome do novo cômodo"
+        required
+      />
     </div>
 
     <button type="submit" [disabled]="isLoading || !newRoomName.trim()">

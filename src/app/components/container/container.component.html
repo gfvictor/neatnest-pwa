@@ -1,92 +1,102 @@
-<div class="login-container">
-    <div class="logo-container">
-        <img
-            ngSrc="assets/logos/neatnest-logo.svg"
-            alt="NeatNest Logo"
-            width="160"
-            height="160"
-            priority
-        />
+<div class="container-container" @fadeInOut>
+  <app-logo></app-logo>
+
+  <div *ngIf="isLoading">
+    <p>Carregando...</p>
+  </div>
+
+  <div class="content-container" *ngIf="!isLoading" @fadeInOut>
+    <div *ngIf="container?.image">
+      <img ngSrc="{{ container?.image }}" alt="Container image" width="180" height="180" />
     </div>
 
-    <div *ngIf="isLoading">Loading Container...</div>
-    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    <h1 class="page-title" *ngIf="!isLoading" @fadeInOut>
+      {{ container?.name }} {{ container?.number }}
+    </h1>
 
-    <div *ngIf="!isLoading && container" class="container-details">
-        <h1>{{ container.name.toUpperCase() }} - {{ container.number }}</h1>
+    <h2 class="page-subtitle" *ngIf="!isLoading" @fadeInOut>
+      Objetos listados: <span class="page-quantity" @fadeInOut>{{ objects.length }}</span>
+    </h2>
 
-        <div *ngIf="container.image">
-            <img ngSrc="{{ container.image }}" alt="Container image" width="180" height="180" />
+    <ng-container *ngIf="!isLoading && objects.length === 0" @fadeInOut>
+      <p>Nenhum objeto encontrado.</p>
+    </ng-container>
+
+    <div class="page-list container-list" *ngIf="!isLoading" @fadeInOut>
+      <div class="objects-table">
+        <div class="table-header">
+          <div>Nome</div>
+          <div>Quantidade</div>
+          <div>Categoria</div>
         </div>
 
-        <div class="object-form" style="margin-top: 2rem">
-            <h3>Add new Object</h3>
-
-            <form (ngSubmit)="createObject()" #objForm="ngForm">
-                <label for="objName"></label>
-                <input
-                    type="text"
-                    id="objName"
-                    [(ngModel)]="newObjName"
-                    name="objName"
-                    placeholder="Object name"
-                    required
-                />
-
-                <label for="objQuantity"></label>
-                <input
-                    type="number"
-                    id="objQuantity"
-                    [(ngModel)]="newObjQuantity"
-                    name="objQuantity"
-                    min="1"
-                    placeholder="Quantity"
-                    required
-                />
-
-                <label for="objCategory"></label>
-                <input
-                    type="text"
-                    id="objCategory"
-                    [(ngModel)]="newObjCategory"
-                    name="objCategory"
-                    placeholder="Category (optional)"
-                />
-
-                <button type="submit" [disabled]="isCreating || !newObjName.trim()">
-                    {{ isCreating ? "Adding..." : "Add Object" }}
-                </button>
-            </form>
-        </div>
-
-        <!-- Lista de objetos -->
-        <div class="object-list" style="margin-top: 2rem">
-            <h3>Objects in this container</h3>
-
-            <div *ngIf="objects.length === 0">
-                <p>No object found.</p>
+        <div class="table-body">
+          <div
+            class="table-row"
+            *ngFor="let obj of objects; let i = index"
+            (click)="router.navigate(['/object', obj.id])"
+            [class.even]="i % 2 === 0"
+          >
+            <div class="cell-name">
+              {{ obj.name }}
             </div>
-
-            <ul *ngIf="objects.length > 0">
-                <li
-                    *ngFor="let obj of objects"
-                    style="cursor: pointer"
-                    (click)="router.navigate(['/object', obj.id])"
-                >
-                    <strong>{{ obj.name }}</strong> — {{ obj.quantity }}
-                    <span *ngIf="obj.category">({{ obj.category }})</span>
-                </li>
-            </ul>
+            <div class="cell-quantity">{{ obj.quantity }}</div>
+            <div class="cell-category">
+              <span *ngIf="obj.category">{{ obj.category }}</span>
+              <span *ngIf="!obj.category" class="text-muted">—</span>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <form class="page-form" (ngSubmit)="createObject()">
+    <div class="page-form-input">
+      <label for="objName"></label>
+      <input
+        type="text"
+        id="objName"
+        [(ngModel)]="newObjName"
+        name="objName"
+        placeholder="Nome do novo objeto"
+        required
+      />
+
+      <div class="split-container">
+        <input
+          type="number"
+          id="objQuantity"
+          [(ngModel)]="newObjQuantity"
+          name="objQuantity"
+          min="1"
+          placeholder="Quant."
+          required
+        />
+
+        <input
+          type="text"
+          id="objCategory"
+          [(ngModel)]="newObjCategory"
+          name="objCategory"
+          placeholder="Categoria (opcional)"
+        />
+      </div>
     </div>
 
-    <div style="margin-top: 1.25rem">
-        <button type="button" (click)="backToRoom()" [disabled]="isLoading">
-            {{ isLoading ? "Loading..." : "Back" }}
-        </button>
-    </div>
+    <button type="submit" [disabled]="isCreating || !newObjName.trim()">
+      {{ isLoading || isCreating ? "Carregando..." : "Adicionar" }}
+    </button>
+  </form>
 
-    <footer>
-        <p>© 2025 NeatNest - All Rights Reserved</p>
-    </footer>
+  <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div>
+    <button class="btn-back" type="button" (click)="backToRoom()" [disabled]="isLoading">
+      {{ isLoading ? "Carregando..." : "Voltar" }}
+    </button>
+  </div>
+
+  <app-arrows></app-arrows>
+  <app-footer></app-footer>
 </div>

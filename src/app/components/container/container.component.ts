@@ -1,16 +1,26 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { CommonModule, NgOptimizedImage } from "@angular/common";
-import type { ContainerObjects, Obj } from "../../services/types";
-import { ContainerApiService } from "../../services/container-api.service";
+import { CommonModule, NgOptimizedImage, Location } from "@angular/common";
+import type { ContainerObjects, Obj } from "@neatnest/services";
+import { ContainerApiService } from "@neatnest/services";
 import { FormsModule } from "@angular/forms";
-import { ObjectApiService } from "../../services/object-api.service";
+import { ObjectApiService } from "@neatnest/services";
+import { ArrowsComponent, FooterComponent, LogoComponent, fadeInOut } from "@neatnest/common";
 
 @Component({
   selector: "app-container",
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, FormsModule],
+  imports: [
+    CommonModule,
+    NgOptimizedImage,
+    FormsModule,
+    LogoComponent,
+    ArrowsComponent,
+    FooterComponent,
+  ],
   templateUrl: "./container.component.html",
+  styleUrls: ["../../../scss/pages/_container.scss"],
+  animations: [fadeInOut],
 })
 export class ContainerComponent {
   isLoading: boolean = false;
@@ -24,12 +34,13 @@ export class ContainerComponent {
 
   objects: Obj[] = [];
   newObjName: string = "";
-  newObjQuantity: number = 1;
+  newObjQuantity: number | null = null;
   newObjCategory: string = "";
 
   constructor(
     public router: Router,
     private route: ActivatedRoute,
+    private location: Location,
     private containerApi: ContainerApiService,
     private objectApi: ObjectApiService,
   ) {}
@@ -38,7 +49,7 @@ export class ContainerComponent {
     this.containerId = this.route.snapshot.paramMap.get("containerId") ?? "";
     this.roomId = this.route.snapshot.paramMap.get("roomId") ?? "";
     if (!this.containerId) {
-      this.errorMessage = "Invalid Container Id";
+      this.errorMessage = "Container com ID inválido.";
       return;
     }
 
@@ -56,7 +67,7 @@ export class ContainerComponent {
         this.isLoading = false;
       },
       error: (): void => {
-        this.errorMessage = "Failed to load container";
+        this.errorMessage = "Falha ao carregar Container.";
         this.isLoading = false;
       },
     });
@@ -71,8 +82,8 @@ export class ContainerComponent {
         this.objects = objects;
         this.isLoading = false;
       },
-      error: (err): void => {
-        this.errorMessage = "Failed to load objects";
+      error: (): void => {
+        this.errorMessage = "Falha ao carregar Objeto";
         this.isLoading = false;
       },
     });
@@ -88,29 +99,25 @@ export class ContainerComponent {
       .create(
         this.containerId,
         this.newObjName.trim(),
-        this.newObjQuantity,
+        this.newObjQuantity ?? 1,
         this.newObjCategory || undefined,
       )
       .subscribe({
         next: (obj: Obj): void => {
           this.objects = [obj, ...this.objects];
           this.newObjName = "";
-          this.newObjQuantity = 1;
+          this.newObjQuantity = this.newObjQuantity ?? 1;
           this.newObjCategory = "";
           this.isCreating = false;
         },
         error: (): void => {
-          this.errorMessage = "Failed to create object";
+          this.errorMessage = "Falha ao criar Objeto";
           this.isCreating = false;
         },
       });
   }
 
   backToRoom(): void {
-    if (this.roomId) {
-      void this.router.navigate(["/room/", this.roomId]);
-    } else {
-      void this.router.navigate(["/household"]);
-    }
+    void this.location.back();
   }
 }
