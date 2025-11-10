@@ -1,0 +1,30 @@
+@use "../abstracts/variables" as vars;
+
+.page-form {
+  margin-top: 1.5rem;
+  width: 320px;
+  max-width: 380px;
+
+  .page-form-input {
+    display: grid;
+    align-items: center;
+  }
+
+  input {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    border: none;
+    border-bottom: 2px solid vars.$main-dark;
+    color: vars.$main-light;
+    font-weight: vars.$font-slim;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+
+    &::placeholder {
+      font-family: "KoHo", sans-serif;
+      font-weight: vars.$font-slim;
+      color: vars.$text-light;
+    }
+  }
+}
