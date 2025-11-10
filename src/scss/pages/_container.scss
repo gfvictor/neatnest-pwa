@@ -1,0 +1,107 @@
+@use "../abstracts/variables" as vars;
+@use "../mixins/default" as *;
+
+.container-container {
+  @include base-container;
+  grid-template-rows: auto 1.5fr 1.25fr auto auto auto 0;
+  gap: 0.5rem;
+
+  .container-list {
+    display: grid;
+  }
+
+  .split-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.5rem;
+  }
+
+  .objects-table {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    width: 100%;
+    max-width: 600px;
+    max-height: 28vh;
+    border: transparent;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    font-size: 1rem;
+    background: vars.$bg-light;
+
+    .table-header {
+      display: grid;
+      grid-template-columns: 2fr 0.5fr 2fr;
+      background: vars.$bg-light;
+      color: vars.$text-light;
+      font-weight: vars.$font-slim;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+      padding: 0.75rem 1rem;
+      gap: 3rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .table-body {
+      display: grid;
+      overflow-y: auto;
+      max-height: 100%;
+
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+      }
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 2fr 0.5fr 2fr;
+      border-radius: 6px;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      gap: 3rem;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+
+      &:hover {
+        background: vars.$hover-dark;
+      }
+
+      &.even {
+        background: vars.$disabled-light;
+
+        &:hover {
+          background: vars.$hover-dark;
+        }
+      }
+
+      .cell-name {
+        font-weight: vars.$font-regular;
+      }
+
+      .cell-quantity {
+        font-weight: vars.$font-slim;
+        text-align: center;
+      }
+
+      .cell-category {
+        font-weight: vars.$font-regular;
+        color: vars.$text-light;
+      }
+    }
+
+    .table-row:last-child {
+      border-bottom: none;
+    }
+  }
+}
