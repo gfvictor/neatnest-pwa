@@ -4,15 +4,19 @@
 
 @use "components/arrows";
 @use "components/buttons";
+@use "components/form";
+@use "components/page";
+@use "components/error";
 
 @use "layout/footer";
 @use "layout/logo";
 
 @use "mixins/loading";
-@use "mixins/container";
+@use "mixins/default";
 
 @use "pages/home";
 @use "pages/login";
 @use "pages/dashboard";
 @use "pages/household";
 @use "pages/room";
+@use "pages/container";
