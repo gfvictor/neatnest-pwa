@@ -1,24 +1,30 @@
-<div class="room-container">
+<div class="room-container" @fadeInOut>
   <app-logo></app-logo>
 
-  <div class="content-container">
-    <h1 class="room-title" *ngIf="room">{{ room.name }}</h1>
+  <div *ngIf="isLoading">
+    <p>Carregando...</p>
+  </div>
 
-    <h2 class="room-subtitle">
-      Containers listados: <span class="room-quantity">{{ containers.length }}</span>
+  <div class="content-container" *ngIf="!isLoading" @fadeInOut>
+    <h1 class="page-title" *ngIf="room">{{ room.name }}</h1>
+
+    <h2 class="page-subtitle" *ngIf="!isLoading" @fadeInOut>
+      Containers listados: <span class="page-quantity">{{ containers.length }}</span>
     </h2>
 
-    <ng-container *ngIf="!isLoading && containers.length === 0">
+    <ng-container *ngIf="!isLoading && containers.length === 0" @fadeInOut>
       <p>Nenhum container encontrado.</p>
     </ng-container>
 
-    <div class="room-list-container">
-      <ul class="room-list">
-        <li class="room-list-items" *ngFor="let c of containers">
+    <div class="page-list-container" *ngIf="!isLoading" @fadeInOut>
+      <ul class="page-list">
+        <li class="page-list-items" *ngFor="let c of containers">
           <button class="btn-room-list" type="button" (click)="openContainer(c)">
             <span class="list item">{{ c.name }} {{ c.number }}</span>
           </button>
-          <button class="btn-delete" type="button" (click)="deleteContainer(c.id)">X</button>
+          <button class="btn-delete" type="button" (click)="deleteContainer(c.id, c.name)">
+            X
+          </button>
         </li>
       </ul>
 
@@ -26,23 +32,23 @@
     </div>
   </div>
 
-  <form class="room-form" (ngSubmit)="createContainer()">
-    <div class="room-form-input">
-      <label for="containerName">Nome do novo container</label>
+  <form class="page-form" (ngSubmit)="createContainer()">
+    <div class="page-form-input">
       <input
         id="containerName"
         type="text"
         [(ngModel)]="newContainerName"
         name="containerName"
+        placeholder="Nome do novo container"
         required
       />
 
-      <label for="containerNumber">Número</label>
       <input
         id="containerNumber"
         type="number"
         [(ngModel)]="newContainerNumber"
         name="containerNumber"
+        placeholder="Número"
         required
         min="0"
         step="1"
