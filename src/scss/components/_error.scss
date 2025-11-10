@@ -1,0 +1,7 @@
+@use "../abstracts/variables" as vars;
+
+.error-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: vars.$error-light;
+}
