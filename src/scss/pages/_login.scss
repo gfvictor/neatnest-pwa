@@ -1,5 +1,5 @@
 @use "../abstracts/variables" as vars;
-@use "../mixins/container" as *;
+@use "../mixins/default" as *;
 
 .login-container {
   @include base-container;

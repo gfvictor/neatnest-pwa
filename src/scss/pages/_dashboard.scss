@@ -1,5 +1,5 @@
 @use "../abstracts/variables" as vars;
-@use "../mixins/container" as *;
+@use "../mixins/default" as *;
 
 .dashboard-container {
   @include base-container;
@@ -31,7 +31,7 @@
     font-size: 1.5rem;
   }
 
-  .dashboard-logout{
+  .dashboard-logout {
     //align-self: end;
   }
 }
