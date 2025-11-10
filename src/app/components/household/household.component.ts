@@ -76,19 +76,28 @@ export class HouseholdComponent {
     });
   }
 
-  deleteRoom(id: string): void {
-    this.isLoading = true;
-    this.errorMessage = "";
+  confirmDelete(name: string, deleteAction: () => void): void {
+    const confirmed = window.confirm(`Deseja deletar [ ${name} ] ?`);
+    if (confirmed) {
+      deleteAction();
+    }
+  }
 
-    this.roomApi.delete(id).subscribe({
-      next: () => {
-        this.rooms = this.rooms.filter((r: Room): boolean => r.id !== id);
-        this.isLoading = false;
-      },
-      error: () => {
-        this.errorMessage = "Falha ao deletar Cômodo.";
-        this.isLoading = false;
-      },
+  deleteRoom(id: string, name: string): void {
+    this.confirmDelete(name, () => {
+      this.isLoading = true;
+      this.errorMessage = "";
+
+      this.roomApi.delete(id).subscribe({
+        next: () => {
+          this.rooms = this.rooms.filter((r: Room): boolean => r.id !== id);
+          this.isLoading = false;
+        },
+        error: () => {
+          this.errorMessage = "Falha ao deletar Cômodo.";
+          this.isLoading = false;
+        },
+      });
     });
   }
 

@@ -1,15 +1,17 @@
 import { Component } from "@angular/core";
-import { CommonModule, NgOptimizedImage } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { Room, RoomApiService, Container, ContainerApiService } from "@neatnest/services";
-import { ArrowsComponent, FooterComponent, LogoComponent } from "@neatnest/common";
+import { ArrowsComponent, FooterComponent, LogoComponent, fadeInOut } from "@neatnest/common";
 
 @Component({
   selector: "app-room",
   standalone: true,
   imports: [CommonModule, FormsModule, LogoComponent, FooterComponent, ArrowsComponent],
   templateUrl: "./room.component.html",
+  styleUrls: ["../../../scss/pages/_room.scss"],
+  animations: [fadeInOut],
 })
 export class RoomComponent {
   isLoading: boolean = true;
@@ -93,19 +95,28 @@ export class RoomComponent {
     });
   }
 
-  deleteContainer(id: string): void {
-    this.isLoading = true;
-    this.errorMessage = "";
+  confirmDelete(name: string, deleteAction: () => void): void {
+    const confirmed = window.confirm(`Deseja deletar [ ${name} ] ?`);
+    if (confirmed) {
+      deleteAction();
+    }
+  }
 
-    this.containerApi.delete(id).subscribe({
-      next: () => {
-        this.containers = this.containers.filter((c: Container): boolean => c.id !== id);
-        this.isLoading = false;
-      },
-      error: () => {
-        this.errorMessage = "Falha ao deletar Container.";
-        this.isLoading = false;
-      },
+  deleteContainer(id: string, name: string): void {
+    this.confirmDelete(name, (): void => {
+      this.isLoading = true;
+      this.errorMessage = "";
+
+      this.containerApi.delete(id).subscribe({
+        next: () => {
+          this.containers = this.containers.filter((c: Container): boolean => c.id !== id);
+          this.isLoading = false;
+        },
+        error: () => {
+          this.errorMessage = "Falha ao deletar Container.";
+          this.isLoading = false;
+        },
+      });
     });
   }
 
