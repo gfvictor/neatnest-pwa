@@ -1,15 +1,17 @@
 import { Component } from "@angular/core";
-import { CommonModule, NgOptimizedImage } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { Obj } from "../../services/types";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ObjectApiService } from "../../services/object-api.service";
+import { ObjectApiService, Obj } from "@neatnest/services";
+import { ArrowsComponent, FooterComponent, LogoComponent, fadeInOut } from "@neatnest/common";
 
 @Component({
   selector: "app-object",
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, FormsModule],
+  imports: [CommonModule, FormsModule, LogoComponent, FooterComponent, ArrowsComponent],
   templateUrl: "./object.component.html",
+  styleUrls: [],
+  animations: [fadeInOut],
 })
 export class ObjectComponent {
   objects: Obj[] = [];
