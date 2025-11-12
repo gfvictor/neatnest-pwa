@@ -77,7 +77,7 @@ export class HouseholdComponent {
   }
 
   confirmDelete(name: string, deleteAction: () => void): void {
-    const confirmed = window.confirm(`Deseja deletar [ ${name} ] ?`);
+    const confirmed = window.confirm(`Deseja excluir [ ${name} ] ?`);
     if (confirmed) {
       deleteAction();
     }
@@ -94,7 +94,7 @@ export class HouseholdComponent {
           this.isLoading = false;
         },
         error: () => {
-          this.errorMessage = "Falha ao deletar Cômodo.";
+          this.errorMessage = "Falha ao excluir cômodo.";
           this.isLoading = false;
         },
       });

@@ -96,7 +96,7 @@ export class RoomComponent {
   }
 
   confirmDelete(name: string, deleteAction: () => void): void {
-    const confirmed = window.confirm(`Deseja deletar [ ${name} ] ?`);
+    const confirmed = window.confirm(`Deseja excluir [ ${name} ] ?`);
     if (confirmed) {
       deleteAction();
     }
@@ -113,7 +113,7 @@ export class RoomComponent {
           this.isLoading = false;
         },
         error: () => {
-          this.errorMessage = "Falha ao deletar Container.";
+          this.errorMessage = "Falha ao excluir container.";
           this.isLoading = false;
         },
       });
