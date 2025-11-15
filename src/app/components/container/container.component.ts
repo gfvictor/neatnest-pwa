@@ -106,7 +106,7 @@ export class ContainerComponent {
         next: (obj: Obj): void => {
           this.objects = [obj, ...this.objects];
           this.newObjName = "";
-          this.newObjQuantity = this.newObjQuantity ?? 1;
+          this.newObjQuantity = null;
           this.newObjCategory = "";
           this.isCreating = false;
         },
