@@ -3,11 +3,12 @@
 
 .container-container {
   @include base-container;
-  grid-template-rows: auto 1.5fr 1.25fr auto auto auto 0;
+  grid-template-rows: auto 1.75fr 1fr auto auto auto 0;
   gap: 0.5rem;
 
   .container-list {
     display: grid;
+    margin-bottom: 3rem;
   }
 
   .split-container {
@@ -21,7 +22,7 @@
     grid-template-rows: auto 1fr;
     width: 100%;
     max-width: 600px;
-    max-height: 28vh;
+    max-height: 40vh;
     border: transparent;
     border-radius: 0.5rem;
     overflow: hidden;
