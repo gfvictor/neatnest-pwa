@@ -27,7 +27,7 @@
         <div class="table-header">
           <div>Nome</div>
           <div>Quantidade</div>
-          <div>Categoria</div>
+          <!--          <div>Categoria</div>-->
         </div>
 
         <div class="table-body">
@@ -41,10 +41,10 @@
               {{ obj.name }}
             </div>
             <div class="cell-quantity">{{ obj.quantity }}</div>
-            <div class="cell-category">
-              <span *ngIf="obj.category">{{ obj.category }}</span>
-              <span *ngIf="!obj.category" class="text-muted">—</span>
-            </div>
+            <!--            <div class="cell-category">-->
+            <!--              <span *ngIf="obj.category">{{ obj.category }}</span>-->
+            <!--              <span *ngIf="!obj.category" class="text-muted">—</span>-->
+            <!--            </div>-->
           </div>
         </div>
       </div>
@@ -52,8 +52,7 @@
   </div>
 
   <form class="page-form" (ngSubmit)="createObject()">
-    <div class="page-form-input">
-      <label for="objName"></label>
+    <div class="page-form-input split-container">
       <input
         type="text"
         id="objName"
@@ -63,25 +62,26 @@
         required
       />
 
-      <div class="split-container">
-        <input
-          type="number"
-          id="objQuantity"
-          [(ngModel)]="newObjQuantity"
-          name="objQuantity"
-          min="1"
-          placeholder="Quant."
-          required
-        />
+      <input
+        type="number"
+        id="objQuantity"
+        [(ngModel)]="newObjQuantity"
+        name="objQuantity"
+        min="1"
+        placeholder="Quant."
+        required
+      />
 
-        <input
-          type="text"
-          id="objCategory"
-          [(ngModel)]="newObjCategory"
-          name="objCategory"
-          placeholder="Categoria (opcional)"
-        />
-      </div>
+      <!--      <div class="split-container">-->
+
+      <!--                <input-->
+      <!--                  type="text"-->
+      <!--                  id="objCategory"-->
+      <!--                  [(ngModel)]="newObjCategory"-->
+      <!--                  name="objCategory"-->
+      <!--                  placeholder="Categoria (opcional)"-->
+      <!--        />-->
+      <!--      </div>-->
     </div>
 
     <button type="submit" [disabled]="isCreating || !newObjName.trim()">
