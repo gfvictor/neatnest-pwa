@@ -21,8 +21,44 @@
         <li class="page-list-items" *ngFor="let r of rooms">
           <button class="btn-household-list" type="button" (click)="openRoom(r)">
             <span class="list-item">{{ r.name }}</span>
+            <div class="actions-menu">
+              <button
+                class="btn-menu-toggle"
+                type="button"
+                (click)="$event.stopPropagation(); toggleMenu(r.id)"
+                [class.active]="activeMenuId === r.id"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="5" r="2" />
+                  <circle cx="12" cy="12" r="2" />
+                  <circle cx="12" cy="19" r="2" />
+                </svg>
+              </button>
+
+              <div
+                class="menu-dropdown"
+                *ngIf="activeMenuId === r.id"
+                (click)="$event.stopPropagation()"
+              >
+                <button class="btn-delete" (click)="deleteRoom(r.id, r.name)">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M3 6h18"></path>
+                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <path d="M5 6v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6"></path>
+                    <path d="M10 11v6"></path>
+                    <path d="M14 11v6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
           </button>
-          <button class="btn-delete" type="button" (click)="deleteRoom(r.id, r.name)">X</button>
         </li>
       </ul>
 

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, HostListener } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
@@ -16,6 +16,7 @@ import { ArrowsComponent, FooterComponent, LogoComponent, fadeInOut } from "@nea
 export class RoomComponent {
   isLoading: boolean = true;
   errorMessage: string = "";
+  activeMenuId: string | null = null;
 
   roomId: string = "";
   room: Room | null = null;
@@ -118,6 +119,15 @@ export class RoomComponent {
         },
       });
     });
+  }
+
+  toggleMenu(id: string) {
+    this.activeMenuId = this.activeMenuId === id ? null : id;
+  }
+
+  @HostListener("document:click")
+  closeMenu() {
+    this.activeMenuId = null;
   }
 
   openContainer(c: Container): void {

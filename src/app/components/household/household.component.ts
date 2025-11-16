@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, HostListener } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
@@ -18,6 +18,7 @@ export class HouseholdComponent {
   rooms: Room[] = [];
   errorMessage: string = "";
   isLoading: boolean = false;
+  activeMenuId: string | null = null;
 
   newRoomName: string = "";
 
@@ -99,6 +100,15 @@ export class HouseholdComponent {
         },
       });
     });
+  }
+
+  toggleMenu(id: string) {
+    this.activeMenuId = this.activeMenuId === id ? null : id;
+  }
+
+  @HostListener("document:click")
+  closeMenu() {
+    this.activeMenuId = null;
   }
 
   openRoom(r: Room): void {

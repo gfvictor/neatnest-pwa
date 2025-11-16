@@ -1,13 +1,15 @@
 @use "../abstracts/variables" as vars;
 
 button {
+  display: grid;
   position: relative;
   background: vars.$button-light;
   color: vars.$text-light;
   width: 100%;
-  max-width: 350px;
-  padding: 0.75rem 3rem;
-  margin-top: 1.5rem;
+  max-width: 400px;
+  padding: 0.75rem 2rem;
+  margin-top: 1rem;
+  gap: 6rem;
   border: none;
   border-radius: 0.8rem;
   font-family: "KoHo", sans-serif;
@@ -82,35 +84,44 @@ button {
 
   &.btn-household-list,
   &.btn-room-list {
+    display: flex;
     width: 100%;
-    max-width: 300px;
+    min-width: 295px;
+    max-width: 350px;
     height: 100%;
     min-height: 50px;
-    padding: 0.25rem 4rem;
-    margin: 0 auto 0.75rem auto;
+    margin: 0 auto 0.75rem 1.5rem;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     font-size: 1.5rem;
   }
 
-  &.btn-delete {
-    background: transparent;
-    width: 25px;
-    max-height: 30px;
+  .btn-delete {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.25rem;
     color: vars.$error-light;
-    font-size: 1rem;
-    font-weight: vars.$font-bold;
+    background: vars.$button-light;
+    border: none;
     cursor: pointer;
-    padding: 0;
-    margin: 0;
+    transition: all 0.2s ease-in-out;
 
     &::before {
       content: "";
-      background: transparent;
+      background: vars.$disabled-light;
     }
 
-    &:hover {
+    &:hover,
+    &.active {
       color: vars.$error-dark;
+
+      &::before {
+        content: "";
+        background: transparent;
+      }
     }
   }
 }
