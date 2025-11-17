@@ -1,0 +1,60 @@
+@use "../abstracts/variables" as vars;
+@use "../mixins/default" as *;
+
+.object-container {
+  @include base-container;
+  grid-template-rows: auto 3fr 0.5fr auto auto auto 0;
+  gap: 0.5rem;
+
+  .object-card {
+    display: grid;
+    justify-items: center;
+    text-align: start;
+
+    .stock-icon {
+      position: relative;
+      background: vars.$button-light;
+      color: vars.$loading-text-light;
+      border-radius: 10px;
+      width: 300px;
+      height: auto;
+      margin: 1rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: -5px;
+        border-radius: 0.8rem;
+        background: vars.$gradient-light;
+        background-size: 300% 300%;
+        filter: blur(6px);
+        opacity: 0.8;
+        transition: all 0.3s ease-in-out;
+        animation: gradientMove 2s linear infinite;
+        z-index: -1;
+      }
+    }
+
+    .info-section {
+      display: grid;
+      margin-top: 0.5rem;
+      padding: 2rem;
+
+      .object-name {
+        font-size: 2rem;
+        font-weight: vars.$font-regular;
+        margin-bottom: 1rem;
+      }
+
+      .info-row {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+
+        .value {
+          color: vars.$text-light;
+          font-weight: vars.$font-slim;
+        }
+      }
+    }
+  }
+}
