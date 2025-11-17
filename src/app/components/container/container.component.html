@@ -27,24 +27,57 @@
         <div class="table-header">
           <div>Nome</div>
           <div>Quantidade</div>
-          <!--          <div>Categoria</div>-->
         </div>
 
-        <div class="table-body">
+        <div class="table-body" *ngIf="!isLoading" @fadeInOut>
           <div
             class="table-row"
             *ngFor="let obj of objects; let i = index"
             (click)="router.navigate(['/object', obj.id])"
             [class.even]="i % 2 === 0"
+            [@fadeInOut]
           >
             <div class="cell-name">
               {{ obj.name }}
             </div>
             <div class="cell-quantity">{{ obj.quantity }}</div>
-            <!--            <div class="cell-category">-->
-            <!--              <span *ngIf="obj.category">{{ obj.category }}</span>-->
-            <!--              <span *ngIf="!obj.category" class="text-muted">—</span>-->
-            <!--            </div>-->
+            <div class="actions-menu">
+              <button
+                class="btn-menu-toggle"
+                type="button"
+                (click)="$event.stopPropagation(); toggleMenu(obj.id)"
+                [class.active]="activeMenuId === obj.id"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="12" cy="5" r="2" />
+                  <circle cx="12" cy="12" r="2" />
+                  <circle cx="12" cy="19" r="2" />
+                </svg>
+              </button>
+
+              <div
+                class="menu-dropdown"
+                *ngIf="activeMenuId === obj.id"
+                (click)="$event.stopPropagation()"
+              >
+                <button class="btn-delete" (click)="deleteObject(obj.id, obj.name)">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M3 6h18"></path>
+                    <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <path d="M5 6v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6"></path>
+                    <path d="M10 11v6"></path>
+                    <path d="M14 11v6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -71,17 +104,6 @@
         placeholder="Quantidade"
         required
       />
-
-      <!--      <div class="split-container">-->
-
-      <!--                <input-->
-      <!--                  type="text"-->
-      <!--                  id="objCategory"-->
-      <!--                  [(ngModel)]="newObjCategory"-->
-      <!--                  name="objCategory"-->
-      <!--                  placeholder="Categoria (opcional)"-->
-      <!--        />-->
-      <!--      </div>-->
     </div>
 
     <button type="submit" [disabled]="isCreating || !newObjName.trim()">

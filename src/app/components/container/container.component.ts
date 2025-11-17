@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, HostListener } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CommonModule, NgOptimizedImage, Location } from "@angular/common";
 import type { ContainerObjects, Obj } from "@neatnest/services";
@@ -26,6 +26,7 @@ export class ContainerComponent {
   isLoading: boolean = false;
   isCreating: boolean = false;
   errorMessage: string = "";
+  activeMenuId: string | null = null;
 
   roomId: string = "";
 
@@ -115,6 +116,44 @@ export class ContainerComponent {
           this.isCreating = false;
         },
       });
+  }
+
+  confirmDelete(name: string, deleteAction: () => void): void {
+    const confirmed = window.confirm(`Deseja excluir [ ${name} ] ?`);
+    if (confirmed) {
+      deleteAction();
+    }
+  }
+
+  deleteObject(id: string, name: string): void {
+    this.confirmDelete(name, () => {
+      this.isLoading = true;
+      this.errorMessage = "";
+
+      this.objectApi.delete(id).subscribe({
+        next: (): void => {
+          this.objects = this.objects.filter((o: Obj) => o.id !== id);
+          this.isLoading = false;
+        },
+        error: (): void => {
+          this.errorMessage = "Failed to delete object";
+          this.isLoading = false;
+        },
+      });
+    });
+  }
+
+  trackByObjId(index: number, obj: Obj): string {
+    return obj.id;
+  }
+
+  toggleMenu(id: string) {
+    this.activeMenuId = this.activeMenuId === id ? null : id;
+  }
+
+  @HostListener("document:click")
+  closeMenu() {
+    this.activeMenuId = null;
   }
 
   backToRoom(): void {

@@ -95,33 +95,33 @@ button {
     justify-content: space-between;
     font-size: 1.5rem;
   }
+}
 
-  .btn-delete {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    padding: 0.5rem 1rem;
-    margin-bottom: 0.25rem;
-    color: vars.$error-light;
-    background: vars.$button-light;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+.btn-delete {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.25rem;
+  color: vars.$error-light;
+  background: vars.$button-light;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &::before {
+    content: "";
+    background: vars.$disabled-light;
+  }
+
+  &:hover,
+  &.active {
+    color: vars.$error-dark;
 
     &::before {
       content: "";
-      background: vars.$disabled-light;
-    }
-
-    &:hover,
-    &.active {
-      color: vars.$error-dark;
-
-      &::before {
-        content: "";
-        background: transparent;
-      }
+      background: transparent;
     }
   }
 }

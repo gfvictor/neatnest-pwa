@@ -1,0 +1,37 @@
+@use "../abstracts/variables" as vars;
+
+.actions-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.btn-menu-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0;
+  transition: all 0.3s ease-in-out;
+
+  &:hover,
+  &.active {
+    color: vars.$error-light;
+  }
+
+  svg {
+    display: inline-block;
+  }
+}
+
+.menu-dropdown {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translateY(-65%) translateX(-50%);
+  border-radius: 8px;
+  min-width: 20px;
+  z-index: 100;
+  animation: hiddenMenu 0.2s ease-in-out;
+  overflow: hidden;
+}
