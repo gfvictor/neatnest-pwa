@@ -57,8 +57,8 @@ export interface Container {
   name: string;
   number?: number;
   image?: string | null;
-  roomId?: UUID | null;
-  sectionId?: UUID | null;
+  roomId: UUID | null;
+  sectionId: UUID | null;
   createdAt: string;
   updatedAt: string;
   deletedAt?: string | null;
@@ -73,7 +73,7 @@ export interface Obj {
   createdAt: string;
   updatedAt: string;
   deletedAt?: string | null;
-  containersId: UUID;
+  containerId: UUID;
 }
 
 export interface HouseholdRelations extends Household {
