@@ -6,6 +6,7 @@ import { ContainerApiService } from "@neatnest/services";
 import { FormsModule } from "@angular/forms";
 import { ObjectApiService } from "@neatnest/services";
 import { ArrowsComponent, FooterComponent, LogoComponent, fadeInOut } from "@neatnest/common";
+import { forkJoin } from "rxjs";
 
 @Component({
   selector: "app-container",
@@ -54,37 +55,24 @@ export class ContainerComponent {
       return;
     }
 
-    this.loadContainer();
-    this.loadObjects();
+    this.loadData();
   }
 
-  private loadContainer(): void {
+  private loadData(): void {
     this.isLoading = true;
     this.errorMessage = "";
 
-    this.containerApi.getById(this.containerId).subscribe({
-      next: (container: ContainerObjects) => {
-        this.container = container;
+    forkJoin({
+      container: this.containerApi.getById(this.containerId),
+      objects: this.objectApi.listByContainer(this.containerId),
+    }).subscribe({
+      next: (result): void => {
+        this.container = result.container;
+        this.objects = result.objects;
         this.isLoading = false;
       },
-      error: (): void => {
-        this.errorMessage = "Falha ao carregar Container.";
-        this.isLoading = false;
-      },
-    });
-  }
-
-  private loadObjects(): void {
-    this.isLoading = true;
-    this.errorMessage = "";
-
-    this.objectApi.listByContainer(this.containerId).subscribe({
-      next: (objects: Obj[]): void => {
-        this.objects = objects;
-        this.isLoading = false;
-      },
-      error: (): void => {
-        this.errorMessage = "Falha ao carregar Objeto";
+      error: () => {
+        this.errorMessage = "Falha ao carregar dados.";
         this.isLoading = false;
       },
     });
