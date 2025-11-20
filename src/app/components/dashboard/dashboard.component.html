@@ -14,7 +14,7 @@
     <p>O que você quer organizar?</p>
   </div>
 
-  <div class="dashboard-options" style="position: relative; z-index: 1">
+  <div class="dashboard-options">
     <button type="button" (click)="goToHousehold()">
       {{ isLoading ? "Carregando..." : "Casa" }}
     </button>
@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <div class="dashboard-logout" style="position: relative; z-index: 1">
+  <div class="dashboard-logout">
     <button class="btn-logout" type="button" (click)="logout()" [disabled]="isLoading">
       {{ isLoading ? "Saindo..." : "Logout" }}
     </button>

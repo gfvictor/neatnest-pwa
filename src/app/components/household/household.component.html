@@ -8,7 +8,7 @@
   <div class="content-container" *ngIf="!isLoading" @fadeInOut>
     <h1 class="page-title">Casa</h1>
 
-    <h2 class="page-subtitle" *ngIf="!isLoading" @fadeInOut>
+    <h2 class="page-subtitle">
       Cômodos listados: <span class="page-quantity">{{ rooms.length }}</span>
     </h2>
 
@@ -16,7 +16,7 @@
       <p>Nenhum cômodo encontrado.</p>
     </ng-container>
 
-    <div class="page-list-container" *ngIf="!isLoading" @fadeInOut>
+    <div class="page-list-container">
       <ul class="page-list" *ngIf="!isLoading" @fadeInOut>
         <li class="page-list-items" *ngFor="let r of rooms">
           <button class="btn-household-list" type="button" (click)="openRoom(r)">

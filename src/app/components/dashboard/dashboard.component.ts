@@ -31,6 +31,8 @@ export class DashboardComponent {
       return;
     }
 
+    this.isLoading = true;
+
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
     this.http

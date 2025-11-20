@@ -39,20 +39,24 @@
       display: grid;
       margin-top: 0.5rem;
       padding: 2rem;
+      width: 100%;
 
       .object-name {
-        font-size: 2rem;
+        text-align: center;
+        font-size: 1.5rem;
         font-weight: vars.$font-regular;
         margin-bottom: 1rem;
       }
 
       .info-row {
         margin-bottom: 0.5rem;
+        color: vars.$text-light;
+        font-weight: vars.$font-slim;
         font-size: 1rem;
 
         .value {
           color: vars.$text-light;
-          font-weight: vars.$font-slim;
+          font-weight: vars.$font-regular;
         }
       }
     }

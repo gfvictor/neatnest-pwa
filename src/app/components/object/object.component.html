@@ -10,7 +10,7 @@
       <img ngSrc="{{ object?.image }}" alt="Object image" width="180" height="180" />
     </div>
 
-    <div class="object-card" *ngIf="!isLoading && object" @fadeInOut>
+    <div class="object-card" *ngIf="object">
       <div class="image-section">
         <img
           *ngIf="object.image; else stockIcon"
@@ -30,7 +30,7 @@
       </div>
 
       <div class="info-section">
-        <h1 class="object-name">{{ object.name }}</h1>
+        <h1 class="object-name">{{ object.name.toUpperCase() }}</h1>
 
         <div class="info-row">
           <span class="label">Quantidade: </span>

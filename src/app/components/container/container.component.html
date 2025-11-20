@@ -10,11 +10,9 @@
       <img ngSrc="{{ container?.image }}" alt="Container image" width="180" height="180" />
     </div>
 
-    <h1 class="page-title" *ngIf="!isLoading" @fadeInOut>
-      {{ container?.name }} {{ container?.number }}
-    </h1>
+    <h1 class="page-title">{{ container?.name }} {{ container?.number }}</h1>
 
-    <h2 class="page-subtitle" *ngIf="!isLoading" @fadeInOut>
+    <h2 class="page-subtitle">
       Objetos listados: <span class="page-quantity" @fadeInOut>{{ objects.length }}</span>
     </h2>
 
@@ -22,14 +20,14 @@
       <p>Nenhum objeto encontrado.</p>
     </ng-container>
 
-    <div class="page-list container-list" *ngIf="!isLoading" @fadeInOut>
+    <div class="page-list container-list">
       <div class="objects-table">
         <div class="table-header">
           <div>Nome</div>
           <div>Quantidade</div>
         </div>
 
-        <div class="table-body" *ngIf="!isLoading" @fadeInOut>
+        <div class="table-body">
           <div
             class="table-row"
             *ngFor="let obj of objects; let i = index"
