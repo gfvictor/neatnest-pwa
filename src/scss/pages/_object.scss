@@ -13,26 +13,12 @@
 
     .stock-icon {
       position: relative;
-      background: vars.$button-light;
+      background: transparent;
       color: vars.$loading-text-light;
       border-radius: 10px;
       width: 300px;
       height: auto;
       margin: 1rem;
-
-      &::before {
-        content: "";
-        position: absolute;
-        inset: -5px;
-        border-radius: 0.8rem;
-        background: vars.$gradient-light;
-        background-size: 300% 300%;
-        filter: blur(6px);
-        opacity: 0.8;
-        transition: all 0.3s ease-in-out;
-        animation: gradientMove 2s linear infinite;
-        z-index: -1;
-      }
     }
 
     .info-section {
@@ -59,6 +45,17 @@
           font-weight: vars.$font-regular;
         }
       }
+    }
+
+    .upload-progress {
+      margin-top: 0.5rem;
+      color: #4caf50;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .object-image {
+      transition: opacity 0.3s;
     }
   }
 }

@@ -39,7 +39,10 @@ export class ObjectApiService {
     return this.http.post<Obj>(`${this.apiUrl}/object`, payload, { headers: this.authHeaders() });
   }
 
-  update(id: string, data: Partial<Pick<Obj, "name" | "quantity" | "category">>): Observable<Obj> {
+  update(
+    id: string,
+    data: Partial<Pick<Obj, "name" | "quantity" | "category" | "image">>,
+  ): Observable<Obj> {
     return this.http.patch<Obj>(`${this.apiUrl}/object/${id}`, data, {
       headers: this.authHeaders(),
     });
@@ -47,7 +50,7 @@ export class ObjectApiService {
 
   uploadImage(objectId: string, file: File): Observable<Obj> {
     const form = new FormData();
-    form.append("file", file);
+    form.append("file", file, file.name);
 
     return this.http.patch<Obj>(`${this.apiUrl}/object/${objectId}/image`, form, {
       headers: this.authHeaders(),
