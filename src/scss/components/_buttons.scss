@@ -17,7 +17,7 @@ button {
   font-weight: vars.$font-regular;
   cursor: pointer;
   overflow: visible;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   &::before {
     content: "";
@@ -26,24 +26,26 @@ button {
     border-radius: 0.8rem;
     background: vars.$gradient-light;
     opacity: 0.6;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     z-index: -1;
   }
 
+  &:active,
   &:hover {
     background: vars.$button-light;
   }
 
+  &:active::before,
   &:hover::before {
     content: "";
     position: absolute;
-    inset: -5px;
+    inset: -1px 0 -5px 0;
     border-radius: 0.8rem;
     background: vars.$gradient-light;
     background-size: 300% 300%;
     filter: blur(6px);
     opacity: 0.8;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     animation: gradientMove 2s linear infinite;
     z-index: -1;
   }
@@ -51,13 +53,13 @@ button {
   &:disabled {
     background: vars.$disabled-light;
     color: vars.$loading-text-light;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     cursor: not-allowed;
 
     &::before {
       background: vars.$gradient-light;
       background-size: 300% 300%;
-      transition: all 0.3s ease-in-out;
+      transition: all 0.2s ease-in-out;
       animation: gradientMove 2s linear infinite;
       opacity: 0.6;
     }
@@ -77,7 +79,7 @@ button {
       border-radius: 0.8rem;
       background: vars.$disabled-light;
       opacity: 0.6;
-      transition: all 0.3s ease-in-out;
+      transition: all 0.2s ease-in-out;
       z-index: -1;
     }
   }
@@ -116,6 +118,7 @@ button {
   }
 
   &:hover,
+  &:active,
   &.active {
     color: vars.$error-dark;
 
