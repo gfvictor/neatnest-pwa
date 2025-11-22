@@ -1,9 +1,10 @@
 import { Component } from "@angular/core";
-import { CommonModule, Location, NgOptimizedImage } from "@angular/common";
+import { CommonModule, Location } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ObjectApiService, Obj, ContainerApiService, RoomApiService } from "@neatnest/services";
 import { ArrowsComponent, FooterComponent, LogoComponent, fadeInOut } from "@neatnest/common";
+import { ObjectImageComponent } from "../object-image/object-image.component";
 
 @Component({
   selector: "app-object",
@@ -14,7 +15,7 @@ import { ArrowsComponent, FooterComponent, LogoComponent, fadeInOut } from "@nea
     LogoComponent,
     FooterComponent,
     ArrowsComponent,
-    NgOptimizedImage,
+    ObjectImageComponent,
   ],
   templateUrl: "./object.component.html",
   styleUrls: ["../../../scss/pages/_object.scss"],
