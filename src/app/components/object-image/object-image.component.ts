@@ -22,6 +22,12 @@ export class ObjectImageComponent {
     this.cameraInput.nativeElement.click();
   }
 
+  openCameraWithAlert() {
+    if (confirm("Deseja abrir a Camera para substituir a imagem atual?")) {
+      this.openCamera();
+    }
+  }
+
   openGallery() {
     this.galleryInput.nativeElement.click();
   }
@@ -49,14 +55,14 @@ export class ObjectImageComponent {
       },
       error: (err) => {
         console.error("Upload error:", err);
-        alert("Falha ao enviar foto. Tente novamente.");
+        alert("Falha ao enviar imagem. Tente novamente.");
         this.isUploading = false;
       },
     });
   }
 
   deleteImage() {
-    if (!confirm("Remover foto do objeto?")) return;
+    if (!confirm("Remover imagem do objeto?")) return;
 
     this.objectApi.update(this.object.id, { image: null }).subscribe({
       next: () => {
