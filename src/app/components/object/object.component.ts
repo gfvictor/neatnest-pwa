@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { CommonModule, Location } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -22,6 +22,8 @@ import { ObjectImageComponent } from "../object-image/object-image.component";
   animations: [fadeInOut],
 })
 export class ObjectComponent {
+  @ViewChild(ObjectImageComponent) objectImageComponent!: ObjectImageComponent;
+
   isLoading: boolean = true;
   errorMessage: string = "";
 
@@ -49,6 +51,12 @@ export class ObjectComponent {
       return;
     }
     this.loadObject(id);
+  }
+
+  addOrReplaceImage(): void {
+    if (this.objectImageComponent) {
+        this.objectImageComponent.openGallery();
+    }
   }
 
   private loadObject(id: string): void {

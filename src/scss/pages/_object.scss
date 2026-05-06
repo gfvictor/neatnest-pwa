@@ -13,12 +13,23 @@
 
     .stock-icon {
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: transparent;
       color: vars.$loading-text-light;
       border-radius: 10px;
-      width: 300px;
-      height: auto;
-      margin: 1rem;
+      width: 100%;
+      max-width: 300px;
+      aspect-ratio: 1 / 1;
+      margin: 1rem auto;
+      cursor: pointer;
+      transition: color 0.2s ease-in-out;
+
+      svg {
+        width: 90%;
+        height: auto;
+      }
     }
 
     .info-section {
@@ -49,13 +60,68 @@
 
     .upload-progress {
       margin-top: 0.5rem;
-      color: #4caf50;
+      color: vars.$green-dark;
       font-size: 0.9rem;
       font-weight: 500;
     }
 
     .object-image {
+      width: 100%;
+      height: 300px;
+      border-radius: 10px;
+      object-fit: cover;
+      display: block;
       transition: opacity 0.3s;
+      cursor: pointer;
+    }
+
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      overflow: hidden;
+      box-shadow: none;
+    }
+
+    .image-actions {
+      display: flex;
+      justify-content: end;
+      gap: 1.5rem;
+      margin: 0.5rem;
+
+      .btn-image-action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 30px;
+        min-height: 30px;
+        padding: 0;
+        border-radius: 0.8rem;
+        background: vars.$button-light;
+        transition: all 0.2s ease-in-out;
+
+        &::before {
+          content: "";
+          border-radius: 0.8rem;
+          inset: 0 0 -3px 0;
+          background: vars.$disabled-light;
+          transition: all 0.2s ease-in-out;
+        }
+
+        &.delete {
+          color: vars.$error-light;
+          &.hover {
+            color: vars.$error-dark;
+
+            &::before {
+              inset: 0 0 -5px 0;
+              background: vars.$gradient-light;
+            }
+          }
+        }
+      }
     }
   }
 }

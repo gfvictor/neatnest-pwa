@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
-import { ApiService } from "@neatnest/services";
+import { SupabaseAuthService } from "@neatnest/services";
 import { ArrowsComponent, FooterComponent, fadeInOut } from "@neatnest/common";
 
 @Component({
@@ -21,39 +21,46 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private apiService: ApiService,
+    private supabaseAuth: SupabaseAuthService,
   ) {}
 
-  login() {
-    this.isLoading = true;
-    this.errorMessage = "";
+  async login() {
+      this.isLoading = true;
+      this.errorMessage = "";
 
-    const body = { identifier: <string>this.identifier, password: <string>this.password };
+  try {
+      const { data, error } = await this.supabaseAuth.login(this.identifier, this.password);
 
-    this.apiService.postData("auth/login", body).subscribe({
-      next: (response) => {
-        const access: string = response?.access_token;
-        const refresh: string = response?.refresh_token;
+      if (error) {
+          this.errorMessage = "Erro ao logar. Verifique suas credenciais.";
+          this.isLoading = false;
+          return;
+      }
 
-        if (!access) {
+      const access = data.session?.access_token;
+      const refresh = data.session?.refresh_token;
+
+      if (!access) {
           this.errorMessage = "Erro de login: token vazio";
           this.isLoading = false;
           return;
-        }
+      }
 
-        localStorage.setItem("token", access);
-        localStorage.setItem("refresh_token", refresh);
-        this.isLoading = false;
-        setTimeout(() => {
+      localStorage.setItem("token", access);
+      if (refresh) {
+          localStorage.setItem("refresh_token", refresh);
+      }
+
+     this.isLoading = false;
+      setTimeout(() => {
           void this.router.navigate(["/dashboard"]);
-        }, 100);
-      },
-      error: () => {
-        this.errorMessage = "Erro ao logar. Verifique suas credenciais.";
-        this.isLoading = false;
-      },
-    });
+      }, 100);
+
+  } catch (err) {
+      this.errorMessage = "Erro interno no servidor.";
+      this.isLoading = false;
   }
+}
 
   navigateToRecovery() {
     void this.router.navigate(["/recovery"]);

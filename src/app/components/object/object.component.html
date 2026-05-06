@@ -33,8 +33,10 @@
   <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
 
   <div>
-    <button class="btn-back" type="button" (click)="goBack()" disabled>
-      {{ isLoading ? "Carregando..." : "Adicionar Imagem" }}
+    <button class="btn-back" type="button" (click)="addOrReplaceImage()"
+    [disabled]="isLoading" >
+      {{ isLoading ? "Carregando..." : (object?.image ? "Atualizar Imagem" : "Adicionar
+      Imagem") }}
     </button>
   </div>
 
