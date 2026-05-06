@@ -12,9 +12,9 @@
       Containers listados: <span class="page-quantity">{{ containers.length }}</span>
     </h2>
 
-    <ng-container *ngIf="!isLoading && containers.length === 0" @fadeInOut>
+    <div *ngIf="!isLoading && containers.length === 0" @fadeInOut>
       <p>Nenhum container encontrado.</p>
-    </ng-container>
+    </div>
 
     <div class="page-list-container" *ngIf="!isLoading" @fadeInOut>
       <ul class="page-list">
