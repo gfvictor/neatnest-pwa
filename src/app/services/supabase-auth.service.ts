@@ -12,6 +12,13 @@ export class SupabaseAuthService {
         this.supabase = createClient(environment.supabaseUrl, environment.supabaseAnonKey);
     }
 
+    async signup(email: string, password: string): Promise<AuthResponse> {
+        return this.supabase.auth.signUp({
+            email,
+            password,
+        });
+    }
+
     async login(email: string, password: string): Promise<AuthResponse> {
         return this.supabase.auth.signInWithPassword({
             email,
