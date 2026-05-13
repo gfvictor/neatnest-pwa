@@ -1,0 +1,42 @@
+<div class="login-container">
+  <div class="login-logo">
+    <img
+        ngSrc="assets/logos/neatnest-logo.webp"
+        width="500"
+        height="500"
+        alt="NeatNest Logo"
+        priority
+    />
+  </div>
+
+  <form (ngSubmit)="register()">
+    <label for="name">Nome</label>
+    <input type="text" id="name" [(ngModel)]="name" name="name" required />
+
+    <label for="email"> E-mail</label>
+    <input type="text" id="email" [(ngModel)]="email" name="email" required />
+
+    <label for="password">Senha</label>
+    <input
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        minlength="6"
+    />
+
+    <button type="submit" [disabled]="isLoading">
+      {{ isLoading ? "Registrando..." : "Registrar" }}
+    </button>
+
+    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </form>
+
+  <div class="links-container">
+    <p class="register-link">Já tem uma conta? <a (click)="navigateToLogin()"><b>Faça Login.</b></a></p>
+  </div>
+
+  <app-arrows></app-arrows>
+  <app-footer></app-footer>
+</div>
