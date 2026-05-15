@@ -5,3 +5,4 @@ export * from "./room-api.service";
 export * from "./container-api.service";
 export * from "./object-api.service";
 export * from "./supabase-auth.service";
+export * from "./user-api.service";

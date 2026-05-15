@@ -53,6 +53,13 @@
     margin-top: 0.5rem;
   }
 
+  .success-message {
+    color: vars.$success-light;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
   .register-link,
   .recovery-link {
     position: relative;

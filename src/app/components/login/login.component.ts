@@ -32,9 +32,11 @@ export class LoginComponent {
       const { data, error } = await this.supabaseAuth.login(this.identifier, this.password);
 
       if (error) {
-          this.errorMessage = "Erro ao logar. Verifique suas credenciais.";
-          this.isLoading = false;
-          return;
+        this.errorMessage = error.message.includes("Email not confirmed")
+          ? "Por favor, confirme o seu e-mail antes de fazer login."
+          : "Erro ao fazer login. Verifique suas credenciais."
+        this.isLoading = false;
+        return;
       }
 
       const access = data.session?.access_token;
