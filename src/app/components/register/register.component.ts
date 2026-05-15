@@ -20,6 +20,7 @@ export class RegisterComponent {
   email = "";
   password = "";
   errorMessage = "";
+  successMessage = "";
   isLoading = false;
 
   constructor(
@@ -31,19 +32,20 @@ export class RegisterComponent {
   async register() {
     this.isLoading = true;
     this.errorMessage = "";
+    this.successMessage = "";
 
     try {
       const { data, error } = await this.supabaseAuth.signup(this.email, this.password);
 
       if (error) {
-        this.errorMessage = "Erro ao registar:" + error.message;
+        this.errorMessage = "Erro ao registar: " + error.message;
         this.isLoading = false;
         return;
       }
 
       const session = data.session;
       if (!session) {
-        this.errorMessage = "Conta criada! Verifique seu e-mail para confirmar.";
+        this.successMessage = "Conta criada! Verifique seu e-mail para confirmar.";
         this.isLoading = false;
         return
       }
