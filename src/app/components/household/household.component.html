@@ -12,7 +12,7 @@
       Cômodos listados: <span class="page-quantity">{{ rooms.length }}</span>
     </h2>
 
-    <ng-container *ngIf="!isLoading && rooms.length === 0" @fadeInOut>
+    <ng-container *ngIf="!isLoading && rooms.length === 0" >
       <p>Nenhum cômodo encontrado.</p>
     </ng-container>
 
