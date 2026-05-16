@@ -2,10 +2,8 @@ import { Component } from "@angular/core";
 import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
-import { SupabaseAuthService, UserApiService } from "@neatnest/services";
+import { SupabaseAuthService } from "@neatnest/services";
 import { ArrowsComponent, FooterComponent, fadeInOut } from "@neatnest/common";
-import { catchError } from "rxjs/operators";
-import { of } from "rxjs";
 
 @Component({
   selector: "app-register",
@@ -26,7 +24,6 @@ export class RegisterComponent {
   constructor(
     private router: Router,
     private supabaseAuth: SupabaseAuthService,
-    private userApi: UserApiService
   ) {}
 
   async register() {
@@ -35,7 +32,7 @@ export class RegisterComponent {
     this.successMessage = "";
 
     try {
-      const { data, error } = await this.supabaseAuth.signup(this.email, this.password);
+      const { data, error } = await this.supabaseAuth.signup(this.email, this.password, this.name);
 
       if (error) {
         this.errorMessage = "Erro ao registar: " + error.message;
@@ -43,32 +40,10 @@ export class RegisterComponent {
         return;
       }
 
-      const session = data.session;
-      if (!session) {
-        this.successMessage = "Conta criada! Verifique seu e-mail para confirmar.";
-        this.isLoading = false;
-        return
-      }
+      this.successMessage = "Conta criada! Verifique seu e-mail para confirmar.";
+      this.isLoading = false;
 
-      const token = session.access_token;
-
-      this.userApi.createProfile(this.name, token).pipe(
-        catchError(err => {
-          this.errorMessage = "Erro ao criar perfil no banco: " + (err.error?.message || "Erro desconhecido");
-          this.isLoading = false;
-          return of(null);
-        })
-      ).subscribe(res => {
-        if (res) {
-          localStorage.setItem("token", token);
-          if (session.refresh_token) {
-            localStorage.setItem("refresh_token", session.refresh_token);
-          }
-          this.isLoading = false;
-          void this.router.navigate(["/dashboard"]);
-        }
-      });
-    } catch (err) {
+    }  catch (err) {
       this.errorMessage = "Erro interno no servidor.";
       this.isLoading = false;
     }
