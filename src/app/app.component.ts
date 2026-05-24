@@ -20,9 +20,15 @@ export class AppComponent implements OnInit {
         .pipe(filter((event): event is VersionReadyEvent => event.type === "VERSION_READY"))
         .subscribe(() => {
           if (confirm("Nova versão do NeatNest disponível! Clique em OK para atualizar.")) {
-            window.location.reload();
+            void this.swUpdate.activateUpdate().then(() => window.location.reload());
           }
-        })
+        });
+      setTimeout(() => {
+        void this.swUpdate.checkForUpdate();
+      }, 5000);
+      setInterval(() => {
+        void this.swUpdate.checkForUpdate();
+      }, 600000);
     }
   }
 }
