@@ -10,6 +10,19 @@ export class SupabaseAuthService {
 
     constructor() {
       this.supabase = createClient(environment.supabaseUrl, environment.supabaseAnonKey);
+      this.supabase.auth.onAuthStateChange((event, session) => {
+        if (event === 'TOKEN_REFRESHED' || event === 'SIGNED_IN') {
+          if (session?.access_token) {
+            localStorage.setItem("token", session.access_token);
+          }
+          if (session?.refresh_token) {
+            localStorage.setItem("refresh_token", session.refresh_token);
+          }
+        } else if (event === 'SIGNED_OUT') {
+          localStorage.removeItem("token");
+          localStorage.removeItem("refresh_token");
+        }
+      });
     }
 
     async signup(email: string, password: string, name: string): Promise<AuthResponse> {
