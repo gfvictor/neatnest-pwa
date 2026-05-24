@@ -1,3 +1,4 @@
+import { HeaderComponent } from "../header/header.component";
 import { Component, HostListener } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CommonModule, NgOptimizedImage, Location } from "@angular/common";
@@ -5,7 +6,7 @@ import type { ContainerObjects, Obj } from "@neatnest/services";
 import { ContainerApiService } from "@neatnest/services";
 import { FormsModule } from "@angular/forms";
 import { ObjectApiService } from "@neatnest/services";
-import { ArrowsComponent, FooterComponent, LogoComponent, fadeInOut } from "@neatnest/common";
+import { ArrowsComponent, FooterComponent, fadeInOut } from "@neatnest/common";
 import { forkJoin } from "rxjs";
 
 @Component({
@@ -15,7 +16,7 @@ import { forkJoin } from "rxjs";
     CommonModule,
     NgOptimizedImage,
     FormsModule,
-    LogoComponent,
+    HeaderComponent,
     ArrowsComponent,
     FooterComponent,
   ],

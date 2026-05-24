@@ -1,14 +1,15 @@
+import { HeaderComponent } from "../header/header.component";
 import { Component, HostListener } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { HouseholdApiService, HouseholdRelations, Room, RoomApiService } from "@neatnest/services";
-import { ArrowsComponent, FooterComponent, LogoComponent, fadeInOut } from "@neatnest/common";
+import { ArrowsComponent, FooterComponent, fadeInOut } from "@neatnest/common";
 
 @Component({
   selector: "app-household",
   standalone: true,
-  imports: [CommonModule, FormsModule, LogoComponent, FooterComponent, ArrowsComponent],
+  imports: [CommonModule, FormsModule, FooterComponent, ArrowsComponent, HeaderComponent],
   templateUrl: "./household.component.html",
   styleUrls: ["../../../scss/pages/_household.scss"],
   animations: [fadeInOut],
