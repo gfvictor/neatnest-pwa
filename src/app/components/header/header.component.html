@@ -1,0 +1,92 @@
+<header class="header">
+  
+  <div class="logo" (click)="goToDashboard(); $event.stopPropagation()">
+    <app-logo></app-logo>
+  </div>
+
+  <div class="search-container" (click)="$event.stopPropagation()">
+    
+    <input 
+      type="text" 
+      class="search-input" 
+      placeholder="Pesquisar..." 
+      [formControl]="searchControl"
+    >
+    
+    <!-- Lupa à direita dentro da barra -->
+    <div class="search-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </div>
+
+    <div class="results" *ngIf="searchResults">
+
+      <ng-container *ngIf="searchResults.objects && searchResults.objects.length > 0">
+        <div class="title">Objetos</div>
+        <ul class="group">
+          <li class="item" *ngFor="let obj of searchResults.objects" 
+              [routerLink]="['/object', obj.id]" 
+              (click)="clearSearch()">
+            <div class="info">
+              <strong>{{ obj.name }} (x{{ obj.quantity }})</strong>
+              <span *ngIf="obj.container?.name">Em: {{ obj.container?.name }}</span>
+            </div>
+          </li>
+        </ul>
+      </ng-container>
+
+      <ng-container *ngIf="searchResults.containers && searchResults.containers.length > 0">
+        <div class="title">Containers</div>
+        <ul class="group">
+          <li class="item" *ngFor="let container of searchResults.containers" 
+              [routerLink]="['/container', container.id]" 
+              (click)="clearSearch()">
+            <div class="info">
+              <strong>{{ container.name }} <span *ngIf="container.number">#{{ container.number }}</span></strong>
+              <span *ngIf="container.room?.name">Local: {{ container.room?.name }}</span>
+              <span *ngIf="container.section?.name">Local: {{ container.section?.name }}</span>
+            </div>
+          </li>
+        </ul>
+      </ng-container>
+
+      <ng-container *ngIf="searchResults.rooms && searchResults.rooms.length > 0">
+        <div class="title">Ambientes (Casa)</div>
+        <ul class="group">
+          <li class="item" *ngFor="let room of searchResults.rooms" 
+              [routerLink]="['/room', room.id]" 
+              (click)="clearSearch()">
+            <div class="info">
+              <strong>{{ room.name }}</strong>
+            </div>
+          </li>
+        </ul>
+      </ng-container>
+
+      <ng-container *ngIf="searchResults.sections && searchResults.sections.length > 0">
+        <div class="title">Ambientes (Trabalho)</div>
+        <ul class="group">
+          <li class="item" *ngFor="let section of searchResults.sections" 
+              [routerLink]="['/section', section.id]" 
+              (click)="clearSearch()">
+            <div class="info">
+              <strong>{{ section.name }}</strong>
+            </div>
+          </li>
+        </ul>
+      </ng-container>
+
+      <div class="empty" 
+           *ngIf="searchResults.objects?.length === 0 && 
+                  searchResults.containers?.length === 0 && 
+                  searchResults.rooms?.length === 0 && 
+                  searchResults.sections?.length === 0">
+        <span *ngIf="!isSearching">Nenhum resultado encontrado.</span>
+        <span *ngIf="isSearching">Buscando...</span>
+      </div>
+
+    </div>
+  </div>
+</header>
