@@ -6,6 +6,10 @@
   grid-template-rows: auto 1.75fr 1fr auto auto auto 0;
   gap: 0.5rem;
 
+  .content-container {
+    margin-top: 5rem;
+  }
+
   .container-list {
     display: grid;
     margin-bottom: 3rem;
