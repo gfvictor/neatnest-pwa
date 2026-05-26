@@ -45,13 +45,15 @@ export class ObjectComponent {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get("id");
-    if (!id) {
-      this.errorMessage = "Objeto com ID inválido.";
-      this.isLoading = false;
-      return;
-    }
-    this.loadObject(id);
+    this.route.paramMap.subscribe(params => {
+      const id = params.get("id");
+      if (!id) {
+        this.errorMessage = "Objeto com ID inválido";
+        this.isLoading = false;
+        return;
+      }
+      this.loadObject(id);
+    });
   }
 
   addOrReplaceImage(): void {
@@ -85,8 +87,8 @@ export class ObjectComponent {
   private loadLocation(containerId: string) {
     this.containerApi.getById(containerId).subscribe({
       next: (container) => {
-        this.containerName = container.number 
-          ? `${container.name} ${container.number}` 
+        this.containerName = container.number
+          ? `${container.name} ${container.number}`
           : (container.name || "Sem nome");
 
         if (container.roomId) {
