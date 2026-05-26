@@ -85,7 +85,9 @@ export class ObjectComponent {
   private loadLocation(containerId: string) {
     this.containerApi.getById(containerId).subscribe({
       next: (container) => {
-        this.containerName = container.name || "Sem nome";
+        this.containerName = container.number 
+          ? `${container.name} ${container.number}` 
+          : (container.name || "Sem nome");
 
         if (container.roomId) {
           this.roomApi.getById(container.roomId).subscribe({

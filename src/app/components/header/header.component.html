@@ -31,7 +31,9 @@
               (click)="clearSearch()">
             <div class="info">
               <strong>{{ obj.name }} (x{{ obj.quantity }})</strong>
-              <span *ngIf="obj.container?.name">Em: {{ obj.container?.name }}</span>
+              <span *ngIf="obj.container?.name">
+                Em: {{ obj.container?.name }}{{ obj.container?.number ? ' ' + obj.container?.number : '' }}
+              </span>
             </div>
           </li>
         </ul>
@@ -44,7 +46,7 @@
               [routerLink]="['/container', container.id]" 
               (click)="clearSearch()">
             <div class="info">
-              <strong>{{ container.name }} <span *ngIf="container.number">#{{ container.number }}</span></strong>
+              <strong>{{ container.name }}{{ container.number ? ' ' + container.number : '' }}</strong>
               <span *ngIf="container.room?.name">Local: {{ container.room?.name }}</span>
               <span *ngIf="container.section?.name">Local: {{ container.section?.name }}</span>
             </div>
