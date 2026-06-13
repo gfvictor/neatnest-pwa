@@ -1,0 +1,35 @@
+<div class="room-container">
+  <app-header></app-header>
+
+  <div *ngIf="isLoading">
+    <p>Carregando...</p>
+  </div>
+
+  <div class="page-container" *ngIf="!isLoading" @fadeInOut>
+    <form class="page-form" (ngSubmit)="confirmAndSave()">
+      <label for="currentName">Nome Atual: {{ currentName }}</label>
+      <input
+        type="text"
+        id="newName"
+        [(ngModel)]="newName"
+        name="newName"
+        placeholder="Novo Nome do Cômodo (Obrigatório)"
+        required
+        [disabled]="isSaving"
+      />
+
+      <button type="submit" [disabled]="!newName.trim() || isSaving">
+        {{ isSaving ? "Salvando..." : "Alterar" }}
+      </button>
+    </form>
+  </div>
+
+  <p class="error-messsage" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div>
+    <button type="button" class="btn-back" (click)="goBack()" [disabled]="isSaving">Cancelar</button>
+  </div>
+
+  <app-arrows></app-arrows>
+  <app-footer></app-footer>
+</div>
