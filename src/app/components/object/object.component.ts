@@ -1,10 +1,9 @@
-import { HeaderComponent } from "../header/header.component";
 import { Component, ViewChild } from "@angular/core";
 import { CommonModule, Location } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ObjectApiService, Obj, ContainerApiService, RoomApiService } from "@neatnest/services";
-import { ArrowsComponent, FooterComponent, fadeInOut } from "@neatnest/common";
+import { ArrowsComponent, HeaderComponent, FooterComponent, fadeInOut } from "@neatnest/common";
 import { ObjectImageComponent } from "../object-image/object-image.component";
 
 @Component({
@@ -19,7 +18,6 @@ import { ObjectImageComponent } from "../object-image/object-image.component";
     ObjectImageComponent,
   ],
   templateUrl: "./object.component.html",
-  styleUrls: ["../../../scss/pages/_object.scss"],
   animations: [fadeInOut],
 })
 export class ObjectComponent {
@@ -114,6 +112,12 @@ export class ObjectComponent {
         this.isLoading = false;
       },
     });
+  }
+
+  goToEdit(): void {
+    if (this.object?.id) {
+      this.router.navigate(["/object/edit", this.object.id]);
+    }
   }
 
   goBack(): void {

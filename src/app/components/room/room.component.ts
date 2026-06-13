@@ -1,17 +1,15 @@
-import { HeaderComponent } from "../header/header.component";
 import { Component, HostListener } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { Room, RoomApiService, Container, ContainerApiService } from "@neatnest/services";
-import { ArrowsComponent, FooterComponent, fadeInOut } from "@neatnest/common";
+import { ArrowsComponent, HeaderComponent, FooterComponent, fadeInOut } from "@neatnest/common";
 
 @Component({
   selector: "app-room",
   standalone: true,
   imports: [CommonModule, FormsModule, FooterComponent, ArrowsComponent, HeaderComponent],
   templateUrl: "./room.component.html",
-  styleUrls: ["../../../scss/pages/_room.scss"],
   animations: [fadeInOut],
 })
 export class RoomComponent {
@@ -129,6 +127,10 @@ export class RoomComponent {
   @HostListener("document:click")
   closeMenu() {
     this.activeMenuId = null;
+  }
+
+  goToEditContainer(id: string): void {
+    void this.router.navigate(["/container/edit", id]);
   }
 
   openContainer(c: Container): void {

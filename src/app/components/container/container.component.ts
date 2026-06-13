@@ -1,4 +1,4 @@
-import { HeaderComponent } from "../header/header.component";
+import { HeaderComponent } from "@neatnest/common";
 import { Component, HostListener } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CommonModule, NgOptimizedImage, Location } from "@angular/common";
@@ -21,7 +21,6 @@ import { forkJoin } from "rxjs";
     FooterComponent,
   ],
   templateUrl: "./container.component.html",
-  styleUrls: ["../../../scss/pages/_container.scss"],
   animations: [fadeInOut],
 })
 export class ContainerComponent {
@@ -143,6 +142,10 @@ export class ContainerComponent {
   @HostListener("document:click")
   closeMenu() {
     this.activeMenuId = null;
+  }
+
+  goToEditObject(id: string): void {
+    void this.router.navigate(["/object/edit", id]);
   }
 
   backToRoom(): void {

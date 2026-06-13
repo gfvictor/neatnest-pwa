@@ -1,4 +1,4 @@
-<div class="object-container" >
+<div class="object-container">
   <app-header></app-header>
 
   <div *ngIf="isLoading">
@@ -33,6 +33,12 @@
   <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
 
   <div>
+    <button class="btn-back" type=button (click)="goToEdit()" [disabled]="isLoading">
+      {{ isLoading ? "Carregando..." : "Alterar Dados" }}
+    </button>
+  <div>
+
+  <div>
     <button class="btn-back" type="button" (click)="addOrReplaceImage()"
     [disabled]="isLoading" >
       {{ isLoading ? "Carregando..." : (object?.image ? "Atualizar Imagem" : "Adicionar
@@ -40,7 +46,6 @@
     </button>
   </div>
 
-  <div>
     <button class="btn-back" type="button" (click)="goBack()" [disabled]="isLoading">
       {{ isLoading ? "Carregando..." : "Voltar" }}
     </button>
