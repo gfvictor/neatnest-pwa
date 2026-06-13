@@ -99,14 +99,13 @@ button {
   }
 }
 
-.btn-delete {
+.btn-delete,
+.btn-edit {
   display: flex;
   align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 0.5rem 1rem;
-  margin-bottom: 0.25rem;
-  color: vars.$error-light;
+  justify-content: center;
+  padding: 0.75rem;
+  margin: 0.75rem 0 0 0;
   background: vars.$button-light;
   border: none;
   cursor: pointer;
@@ -114,17 +113,26 @@ button {
 
   &::before {
     content: "";
-    background: vars.$disabled-light;
+    background: transparent;
   }
+}
+
+.btn-delete {
+  color: vars.$error-light;
 
   &:hover,
   &:active,
   &.active {
     color: vars.$error-dark;
+  }
+}
 
-    &::before {
-      content: "";
-      background: transparent;
-    }
+.btn-edit {
+  color: vars.$text-light;
+
+  &:hover,
+  &:active,
+  &.active {
+    color: vars.$main-light;
   }
 }

@@ -10,7 +10,6 @@ import { environment } from "@neatnest/environments";
   standalone: true,
   imports: [CommonModule, LogoComponent, FooterComponent, ArrowsComponent],
   templateUrl: "./dashboard.component.html",
-  styleUrls: ["../../../scss/pages/_dashboard.scss"],
   animations: [fadeInOut],
 })
 export class DashboardComponent {

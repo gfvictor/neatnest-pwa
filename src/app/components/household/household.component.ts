@@ -1,17 +1,15 @@
-import { HeaderComponent } from "../header/header.component";
 import { Component, HostListener } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { HouseholdApiService, HouseholdRelations, Room, RoomApiService } from "@neatnest/services";
-import { ArrowsComponent, FooterComponent, fadeInOut } from "@neatnest/common";
+import { ArrowsComponent, HeaderComponent, FooterComponent, fadeInOut } from "@neatnest/common";
 
 @Component({
   selector: "app-household",
   standalone: true,
   imports: [CommonModule, FormsModule, FooterComponent, ArrowsComponent, HeaderComponent],
   templateUrl: "./household.component.html",
-  styleUrls: ["../../../scss/pages/_household.scss"],
   animations: [fadeInOut],
 })
 export class HouseholdComponent {
@@ -103,6 +101,7 @@ export class HouseholdComponent {
     });
   }
 
+
   toggleMenu(id: string) {
     this.activeMenuId = this.activeMenuId === id ? null : id;
   }
@@ -111,6 +110,10 @@ export class HouseholdComponent {
   closeMenu() {
     this.activeMenuId = null;
   }
+
+  goToEditRoom(id: string): void {
+    void this.router.navigate(["/room/edit", id]);
+  };
 
   openRoom(r: Room): void {
     void this.router.navigate(["/room", r.id]);

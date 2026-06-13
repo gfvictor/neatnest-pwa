@@ -25,13 +25,15 @@
 }
 
 .menu-dropdown {
+  display: flex;
   position: absolute;
+  flex-direction: row;
   top: 65%;
   left: 50%;
-  transform: translateY(-65%) translateX(-50%);
+  transform: translateY(-65%) translateX(-55%);
   border-radius: 8px;
   min-width: 20px;
   z-index: 100;
-  animation: hiddenMenu 0.2s ease-in-out;
+  animation: all 0.2s ease-in-out;
   overflow: hidden;
 }

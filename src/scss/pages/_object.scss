@@ -61,6 +61,7 @@
     .upload-progress {
       margin-top: 0.5rem;
       color: vars.$green-dark;
+      text-align: center;
       font-size: 0.9rem;
       font-weight: 500;
     }
@@ -86,7 +87,7 @@
 
     .image-actions {
       display: flex;
-      justify-content: end;
+      justify-content: center;
       gap: 1.5rem;
       margin: 0.5rem;
 

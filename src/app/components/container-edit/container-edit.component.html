@@ -1,0 +1,45 @@
+<div class="container-container">
+  <app-header></app-header>
+
+  <div *ngIf="isLoading">
+    <p>Carregando...</p>
+  </div>
+
+  <div class="page-container" *ngIf="!isLoading" @fadeInOut>
+    <form class="page-form" (ngSubmit)="confirmAndSave()">
+      <label for="currentName">Nome atual: {{ currentName }}</label>
+      <input
+        type="text"
+        id="newName"
+        [(ngModel)]="newName"
+        name="newName"
+        placeholder="Novo Nome do Container (Obrigatório)"
+        required
+        [disabled]="isSaving"
+      />
+
+      <label for="currentNumber">Numero atual: {{ currentNumber || " " }}</label>
+      <input
+        type="number"
+        id="newNumber"
+        [(ngModel)]="newNumber"
+        name="newNumber"
+        placeholder="Nova Numeração"
+        [disabled]="isSaving"
+      />
+
+      <button type="submit" [disabled]="(!newName.trim() && newNumber == null) || isSaving">
+        {{ isSaving ? "Salvando..." : "Alterar" }}
+      </button>
+    </form>
+  </div>
+
+  <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div>
+    <button type="button" class="btn-back" (click)="goBack()" [disabled]="isSaving">Cancelar</button>
+  </div>
+
+  <app-arrows></app-arrows>
+  <app-footer></app-footer>
+</div>

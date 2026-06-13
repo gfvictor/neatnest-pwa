@@ -1,0 +1,56 @@
+<div class="object-container">
+  <app-header></app-header>
+
+  <div *ngIf="isLoading">
+    <p>Carregando...</p>
+  </div>
+
+  <div class="page-container" *ngIf="!isLoading" @fadeInOut>
+    <form class="page-form" (ngSubmit)="confirmAndSave()">
+      <label for="currentName">Nome Atual: {{ currentName }}</label>
+      <input
+        type="text"
+        id="newName"
+        [(ngModel)]="newName"
+        name="newName"
+        placeholder="Novo Nome do Objeto (Obrigatório)"
+        required
+        [disabled]="isSaving"
+      />
+
+      <label for="currentQuantity">Quantidade Atual: {{ currentQuantity }}</label>
+      <input
+        type="number"
+        id="newQuantity"
+        [(ngModel)]="newQuantity"
+        name="newQuantity"
+        placeholder="Nova Quantidade (Obrigatório)"
+        required
+        [disabled]="isSaving"
+      />
+
+      <label for="currentCategory">Categoria Atual: {{ currentCategory || " " }}</label>
+      <input
+        type="text"
+        id="newCategory"
+        [(ngModel)]="newCategory"
+        name="newCategory"
+        placeholder="Nova Categoria"
+        [disabled]="isSaving"
+      />
+
+      <button type="submit" [disabled]="!newName || newQuantity == null ||newCategory || isSaving">
+        {{ isSaving ? "Salvando..." : "Alterar" }}
+      </button>
+    </form>
+  </div>
+
+  <p class="error-messsage" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <div>
+    <button type="button" class="btn-back" (click)="goBack()" [disabled]="isSaving">Cancelar</button>
+  </div>
+
+  <app-arrows></app-arrows>
+  <app-footer></app-footer>
+</div>

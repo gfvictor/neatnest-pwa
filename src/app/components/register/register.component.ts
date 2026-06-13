@@ -10,7 +10,6 @@ import { ArrowsComponent, FooterComponent, fadeInOut } from "@neatnest/common";
   standalone: true,
   imports: [CommonModule, FormsModule, NgOptimizedImage, FooterComponent, ArrowsComponent],
   templateUrl: "./register.component.html",
-  styleUrls: ['../../../scss/pages/_login.scss'],
   animations: [fadeInOut],
 })
 export class RegisterComponent {
