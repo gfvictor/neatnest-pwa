@@ -12,7 +12,6 @@ import { SearchService, SearchResults } from "@neatnest/services";
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule, LogoComponent],
   templateUrl: "./header.component.html",
-  styleUrls: ["../../../../scss/components/_header.scss"]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   searchControl = new FormControl("");
@@ -46,11 +45,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.searchControl.valueChanges
       .pipe(
         takeUntil(this.destroy$),
-        // O tap intercepta a digitação IMEDIATAMENTE antes do delay do debounce
         tap(query => {
           if (query && query.trim().length > 0) {
             this.isSearching = true;
-            // Inicializa um objeto vazio para o dropdown abrir e mostrar "Buscando..."
             if (!this.searchResults) {
               this.searchResults = { objects: [], containers: [], rooms: [], sections: [] };
             }
