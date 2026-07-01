@@ -1,59 +1,60 @@
-# NeatnestPwa
+<div align="center">
+<img alt="NeatNest Logo" height="450" src="/src/assets/logos/neatnest-logo-dark.svg" width="350"/>
+</div>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
+<div align="center">
+<i>Sistema de Gerenciamento de Inventário Residencial e Profissional</i>
+</div>
 
-## Development server
+---
 
-To start a local development server, run:
+### Este repositório contém a interface frontend do projeto, construída como um **PWA (Progressive Web Application)** moderno, focado em trazer uma experiência de aplicativo nativo diretamente pelo navegador.
 
-```bash
-ng serve
-```
+#### Este Projeto é parte do meu Trabalho de Conclusão de Curso em Ciência da Computação e já se encontra em produção, sendo ativamente testado por usuários reais.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+### Por que um PWA?
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+A escolha da arquitetura PWA para o frontend do NeatNest foi estratégica. O objetivo era eliminar atrito de instalação via App Stores, garantindo que o usuário tenha acesso imediato
+à plataforma. Com o PWA, o NeatNest oferece:
+- **Instalação Direta**: Adicionável à tela inicial do aparelho com um clique;
+- **Experiência Nativa**: Funciona em tela cheia, sem barras de navegação, como um app tradicional;
+- **Leveza**: Ocupa uma fração do espaço de armazenamento comparado a um aplicativo nativo baixado pelas lojas virtuais;
+- **Cross-Platform**: Um único código fonte rodando de forma impecável no iOS, Android, Windows e Mac.
 
-```bash
-ng generate component component-name
-```
+### Principais Funcionalidades
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **Controle de Inventário**: Gerenciamento centralizado de itens da casa e do trabalho;
+- **Upload Otimizado de Imagens**: Suporte a anexos de fotos dos itens. As imagens enviadas pelo frontend são automaticamente convertidas para `.webp` e otimizadas pelo backend, economizando dados e garantindo carregamento rápido;
+- **Autenticação e Segurança (Supabase Auth)**: Sistema de login robusto e controle de acesso com chaves anônimas baseadas em JWT, permitindo delegar funções complexas à API;
+- **Controle de Acesso Baseado em Cargos (RBAC)**: Hierarquia de permissões gerenciadas e refletidas de forma fluida na interface de usuário;
+- **Design Mobile-First**: Interface responsiva projetada especificamente para o uso confortável com apenas um mão em aparelhos móveis.
 
-```bash
-ng generate --help
-```
+### Como Instalar no Smartphone
 
-## Building
+**Link Oficial**: [NeatNest](https://neatnest.codifylab.app)
 
-To build the project run:
+**Para iOS (Safari)**:
+1. Acesse o link oficial do NeatNest no Safari;
+2. Toque no ícone de **Compartilhar** (quadrado com uma seta para cima);
+3. Selecione **"Adicionar à Tela de Início"**;
+4. O app NeatNest aparecerá na sua lista de aplicativos.
 
-```bash
-ng build
-```
+**Para Android (Chrome)**:
+1. Acesse o link oficial do NeatNest no Google Chrome;
+2. O navegador exibirá um banner automático na parte inferior da tela solicitando a instalação;
+3. (Alternativo) Toque no menu de 3 pontos no canto superior direito e selecione **Instalar Aplicativo**.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Arquitetura e Ecossistema
 
-## Running unit tests
+O NeatNest é um sistema Full-Stack divido em dois monolitos modernos:
+- **Frontend (NeatNest PWA) em Angular**: Hospedado de forma estática e global. Responsável pela interação direta com o usuário, cacheamento local e comunicação limpa via REST.
+- **[Backend (NeatNest API) em NestJS](https://github.com/gfvictor/neatnest-api/tree/develop)**: Uma API REST robusta construída em NestJS, hospedada na DigitalOcean App Platform. Ela atua como uma fortaleza para regras de negócio pesadas (ex: conversão de imagens usando `sharp`, persistência no Banco de Dados via Prisma e roteamento de arquivos no Storage do Supabase). Para ver a documentação técnica da API, acesse o repositório.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Sobre o Autor
 
-```bash
-ng test
-```
+Desenvolvido por **Victor Farias** como projeto final (TCC) em Ciência da Computação, aplicando conceitos avançados de Arquitetura Limpa (Clean Architecture), SOLID, e design autoral centrado no usuário em ambientes de nuvem.
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+*(c) 2026 NeatNest - Todos os Direitos Reservados* 
